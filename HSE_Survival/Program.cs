@@ -10,9 +10,7 @@ namespace HSE_Survival
     {
         static void Main(string[] args)
         {
-            // Настя, привет!
-            // Как это блять работает?????????
-            //прогеры от бога блин
+            // Скоро здесь будет очень крутая игра! #like4like #follow4follow #братзабрата
         }
     }
 }
