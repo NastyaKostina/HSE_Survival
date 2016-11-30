@@ -10,7 +10,7 @@ namespace HSE_Survival
     {
         static void Main(string[] args)
         {
-            // Настя, привет!
+            // Настя, привет!ff
         }
     }
 }
