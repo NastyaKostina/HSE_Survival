@@ -10,7 +10,7 @@ namespace HSE_Survival
     {
         static void Main(string[] args)
         {
-            public int MyProperty { get; set; }
+            //,kfkfkfkfkf
     }
-    }
+}
 }
