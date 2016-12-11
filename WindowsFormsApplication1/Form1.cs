@@ -19,11 +19,11 @@ namespace WindowsFormsApplication1
 
         bool Player_Left;
         bool Player_Right;
-        int movement_speed = 5;
         bool Player_Jump = false;
-        int jump_speed = 3;
         int Force = 0;
-        int Gravity = 20;
+        int Gravitation = 20;
+        int jump_speed = 3;
+
         private void Form1_KeyDown(object sender, KeyEventArgs e)
         {
             switch (e.KeyCode)
@@ -38,7 +38,7 @@ namespace WindowsFormsApplication1
                     if (!Player_Jump && IsOutOfGame(Player))
                     {
                         Player_Jump = true;
-                        Force = Gravity;
+                        Force = Gravitation;
                         Player.Top -= jump_speed;
                     }
                     break;
@@ -62,18 +62,6 @@ namespace WindowsFormsApplication1
             }
         }
 
-        private void timer_move_Tick(object sender, EventArgs e)
-        {
-            if (Player_Right && Player.Right <= Sky.Width - 3)
-            {
-                Player.Left += movement_speed;
-            }
-            if (Player_Left && Player.Left >= 3)
-            {
-                Player.Left -= movement_speed;
-            }
-        }
-
         public bool IsOutOfGame(PictureBox Player1)
         {
             if (Player1.Location.X < 0 || Player1.Location.X > Sky.Width)
@@ -83,6 +71,23 @@ namespace WindowsFormsApplication1
             return false;
         }
 
+        //move right left
+        private void timer_move_Tick(object sender, EventArgs e)
+        {
+            if (Player.Right > Block.Left
+                && Player.Left < Block.Right - Player.Width
+                && Player.Bottom > Block.Top)
+                Player_Right = false;
+
+            if (Player.Left < Block.Right && Player.Right > Block.Left + Player.Width / 2
+                && Player.Bottom > Player.Top)
+                Player_Left = false;
+            Student.Movements(Player_Right, Player_Left, this);
+            
+        }
+
+        
+        //jump
         private void timer_Jump_Tick(object sender, EventArgs e)
         {
             if (Force > 0)
