@@ -68,6 +68,11 @@ namespace Game_HSE
         /// checking for collisions, gathering input, and playing audio.
         /// </summary>
         /// <param name="gameTime">Provides a snapshot of timing values.</param>
+
+        int Force = 0;
+        int Gravitation = 20;
+        int jump_speed = 3;
+        bool Player_Jump = false;
         protected override void Update(GameTime gameTime)
         {
             KeyboardState keyboardState = Keyboard.GetState();
@@ -91,7 +96,12 @@ namespace Game_HSE
             }
             if (keyboardState.IsKeyDown(Keys.Space))
             {
-                
+                if (!Player_Jump && IsOutOfGame(positionmario, mario))
+                {
+                    Player_Jump = true;
+                    Force = Gravitation;
+                    positionmario.Y -= jump_speed;
+                }
             }
 
             if (positionmario.X < 0)
@@ -109,6 +119,25 @@ namespace Game_HSE
             }
             else
                 color = Color.CornflowerBlue;
+
+            if (Force > 0)
+            {
+                if (IsOutOfGame(positionmario, mario)) Force = 0;
+                else
+                {
+                    Force--;
+                    positionmario.Y -= jump_speed;
+                }
+            }
+            else
+                Player_Jump = false;
+
+            if (!Player_Jump && positionmario.Y < Window.ClientBounds.Height - 50
+                && !IsOutOfGame(positionmario, mario))
+                positionmario.Y += jump_speed;
+
+            if (!Player_Jump && positionmario.Y + mario.Height > Window.ClientBounds.Height - 1)
+                positionmario.Y --;
 
             base.Update(gameTime);
         }
@@ -138,6 +167,15 @@ namespace Game_HSE
                 (int)position.Y, monster.Width, monster.Height);
 
             return mario1.Intersects(monster1);
+        }
+
+        public bool IsOutOfGame(Vector2 positionmario1, Texture2D mario1)
+        {
+            if (positionmario1.X < 0 || positionmario1.X > Window.ClientBounds.Width)
+                return true; //out of width of the screen
+            if (positionmario1.Y + mario1.Height > Window.ClientBounds.Height - 3 || positionmario1.Y < 0)
+                return true; //out of height of the screen
+            return false;
         }
     }
 }

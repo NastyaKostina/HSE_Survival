@@ -9,6 +9,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WindowsFormsApplication1", 
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Game_HSE", "Game_HSE\Game_HSE.csproj", "{6AEC6CAA-658A-4CED-8EB0-2C433572F317}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Game1", "Game1\Game1.csproj", "{A831D0C7-768E-44BF-8D31-9ABC203B46FF}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -39,6 +41,12 @@ Global
 		{6AEC6CAA-658A-4CED-8EB0-2C433572F317}.Release|Any CPU.ActiveCfg = Release|x86
 		{6AEC6CAA-658A-4CED-8EB0-2C433572F317}.Release|x86.ActiveCfg = Release|x86
 		{6AEC6CAA-658A-4CED-8EB0-2C433572F317}.Release|x86.Build.0 = Release|x86
+		{A831D0C7-768E-44BF-8D31-9ABC203B46FF}.Debug|Any CPU.ActiveCfg = Debug|x86
+		{A831D0C7-768E-44BF-8D31-9ABC203B46FF}.Debug|x86.ActiveCfg = Debug|x86
+		{A831D0C7-768E-44BF-8D31-9ABC203B46FF}.Debug|x86.Build.0 = Debug|x86
+		{A831D0C7-768E-44BF-8D31-9ABC203B46FF}.Release|Any CPU.ActiveCfg = Release|x86
+		{A831D0C7-768E-44BF-8D31-9ABC203B46FF}.Release|x86.ActiveCfg = Release|x86
+		{A831D0C7-768E-44BF-8D31-9ABC203B46FF}.Release|x86.Build.0 = Release|x86
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
