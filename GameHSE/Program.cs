@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Game_HSE
+namespace GameHSE
 {
 #if WINDOWS || LINUX
     /// <summary>
