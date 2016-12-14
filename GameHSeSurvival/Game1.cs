@@ -87,6 +87,7 @@ namespace GameHSeSurvival
             base.Update(gameTime);
             player.Update(gameTime);
             camera.Update(player.Sprite_vector, board.columns * 64, board.rows * 64);
+            board.Update();
             repo.Collisions(player);
         }
 
