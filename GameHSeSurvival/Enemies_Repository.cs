@@ -8,46 +8,48 @@ using System.Threading.Tasks;
 
 namespace GameHSeSurvival
 {
-    class Enemies_Repository
+    class Enemies_Repository:IRepository
     {
-        #region Teacher
-        public List<Teacher> Teachers = new List<Teacher>();
-        public void DrawTeacher(SpriteBatch sb)
+        const int ground_level = 576;
+        public List<Teacher> _Teachers = new List<Teacher>();
+        List<Coin> _Coins = new List<Coin>();
+        Player _Player;
+        Board _Board;
+        public List<Teacher> Teachers
         {
-            for (int i = 0; i < Teachers.Count(); i++)
+            get
             {
-                Teachers[i].Draw();
+                return _Teachers;
             }
         }
-        public void Collisions(Player player)
-        {
-            for (int i = 0; i < Teachers.Count(); i++)
-            {
-                if  (Teachers[i].HurtOrKilledBy(player)[0])
-                {
-                    Teachers.Remove(Teachers[i]);
-                    i--;
-                    player.move -= Vector2.UnitY * 25f;
-                    break;
-                }
 
-                if (Teachers[i].HurtOrKilledBy(player)[1])
-                {
-                    player.Sprite_vector = new Vector2(550, 576 - player.Sprite_texture.Height);
-                    break;
-                }
-                if (Teachers[i].HurtOrKilledBy(player)[0] == false && Teachers[i].HurtOrKilledBy(player)[1] == false)
-                { }
+        public List<Coin> Coins
+        {
+            get
+            {
+                return _Coins;
             }
         }
-        #endregion
 
-        #region Coins
+        public Player Player
+        {
+            get
+            {
+                return _Player;
+            }
+        }
+
+        public Board Board
+        {
+            get
+            {
+                return _Board;
+            }
+        }
+
         int[,] coins = new int[87, 10];
-        List<Coin> ListCoins = new List<Coin>();
-        public void Method(Texture2D coin_texture, SpriteBatch sb)
+        public void CoinsCoordinates()
         {
-            #region CoordinatsOfCoins
             coins[9, 1] = 1;
             coins[9, 3] = 1;
             coins[18, 5] = 1;
@@ -85,32 +87,67 @@ namespace GameHSeSurvival
             coins[78, 7] = 1;
             coins[81, 8] = 1;
             coins[81, 8] = 1;
-            #endregion
+        }
+
+        public void SetValues(Texture2D player_texture, Texture2D block_texture, Texture2D teacher1_texture, Texture2D teacher2_texture, Texture2D coin_texture, SpriteBatch spriteBatch)
+        {
+            _Player = new Player(player_texture, new Vector2(550, ground_level - player_texture.Height), spriteBatch);
+            _Board = new Board(spriteBatch, block_texture, 87, 10);
+            this.CoinsCoordinates();
             for (int i = 0; i < 87; i++)
             {
                 for (int j = 0; j < 10; j++)
                 {
-                    if (coins[i,j] == 1)
-                        ListCoins.Add(new Coin(coin_texture, new Vector2(i * 64, j * 64), sb));
+                    if (coins[i, j] == 1)
+                        _Coins.Add(new Coin(coin_texture, new Vector2(i * 64, j * 64), spriteBatch));
                 }
             }
+
+            _Teachers.Add(new Teacher(teacher1_texture, new Vector2(3840, ground_level - teacher1_texture.Height), spriteBatch));
+            _Teachers.Add(new Teacher(teacher2_texture, new Vector2(3200, ground_level - teacher2_texture.Height), spriteBatch));
+            _Teachers.Add(new Teacher(teacher2_texture, new Vector2(4544, ground_level - teacher2_texture.Height - 192), spriteBatch));
+
         }
+
+
+        //public void DrawTeacher(SpriteBatch sb)
+        //{
+        //    for (int i = 0; i < Teachers.Count(); i++)
+        //    {
+        //        Teachers[i].Draw();
+        //    }
+        //}
+        public void CollisionsTeachers()
+        {
+            for (int i = 0; i < Teachers.Count(); i++)
+            {
+                if (Teachers[i].IsTop(Player))
+                { Teachers.RemoveAt(i); Player.move -= Vector2.UnitY * 25f; }
+                if (Teachers[i].IsLaterally(Player)) Player.Sprite_vector = new Vector2(550, 576 - Player.Sprite_texture.Height);
+            }
+        }
+        
+        public void CollisionsCoins()
+        {
+            for (int i = 0; i < _Coins.Count; i ++)
+            {
+                if (Player.rectangle.Intersects(_Coins[i].rectangle))
+                    _Coins.RemoveAt(i);
+            }
+        }
+
         public void Draw()
         {
-            foreach (var item in ListCoins)
+            Player.Draw();
+            Board.Draw();
+            for (int i = 0; i < Teachers.Count(); i++)
+            {
+                Teachers[i].Draw();
+            }
+            foreach (var item in _Coins)
             {
                 item.Draw();
             }
         }
-        public void CollisionsCoins(Sprite obj)
-        {
-            for (int i = 0; i < ListCoins.Count; i ++)
-            {
-                if (obj.rectangle.Intersects(ListCoins[i].rectangle))
-                    ListCoins.RemoveAt(i);
-            }
-        }
-        #endregion
-
     }
 }
