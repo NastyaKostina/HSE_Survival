@@ -77,7 +77,7 @@ namespace GameHSeSurvival
             repo.Player.Update(gameTime);
             camera.Update(repo.Player.Sprite_vector, repo.Board.columns * 64, repo.Board.rows * 64);
             repo.Board.Update();
-            repo.CollisionsTeachers();
+            repo.CollisionsTeachers(repo.Player);
             repo.CollisionsCoins();
         }
 

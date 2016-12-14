@@ -40,18 +40,18 @@ namespace GameHSeSurvival
             bool[] WhatToDo = new bool[2];
             WhatToDo[0] = false; WhatToDo[1] = false; // WhatToDo[0] - KILL THE TEACHER; WhatToDo[1] - KILL THE PLAYER
             Rectangle onePixelDown = player.rectangle;
-            Rectangle fourPixelLeft = player.rectangle;
-            Rectangle fourPixelRight = player.rectangle;
             onePixelDown.Offset(0, 1);
-            fourPixelLeft.Offset(-4, 0);
-            fourPixelRight.Offset(4, 0);
             if (onePixelDown.Intersects(rectangle))
             {
+                Rectangle fourPixelLeft = player.rectangle;
+                Rectangle fourPixelRight = player.rectangle;
+                fourPixelLeft.Offset(-4, 0);
+                fourPixelRight.Offset(4, 0);
                 if (onePixelDown.Intersects(rectangle) &&
                     player.rectangle.Bottom >= rectangle.Top && // пересеклись сверху
                     (player.rectangle.X >= rectangle.X - rectangle.Width || // наехал на учителя слева
                     (player.rectangle.X >= rectangle.X && player.rectangle.X <= rectangle.X + rectangle.Width)) && // наехал на учителя справа
-                    (fourPixelLeft.Right > rectangle.Left && fourPixelRight.Left < rectangle.Right)) // а учитель по бокам-то всё видит
+                    ((fourPixelLeft.Right - rectangle.Left) >= 4 && (fourPixelRight.Left - rectangle.Right <= 4))) // а учитель по бокам-то всё видит
                 {
                     WhatToDo[0] = true;
                 }
