@@ -12,8 +12,8 @@ namespace GameHSeSurvival
     {
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
-        
 
+        SpriteFont Font;
         
         private Camera camera;
         private Enemies_Repository repo = new Enemies_Repository();
@@ -53,6 +53,8 @@ namespace GameHSeSurvival
             Texture2D teacher2_texture = Content.Load<Texture2D>("учительница.png");
             Texture2D coin_texture = Content.Load<Texture2D>("монетка.png");
             repo.SetValues(player_texture, block_texture, teacher1_texture, teacher2_texture, coin_texture, spriteBatch);
+            Font = Content.Load<SpriteFont>("Font");
+            
         }
 
         /// <summary>
@@ -96,7 +98,7 @@ namespace GameHSeSurvival
                               null, null, null, null,
                               camera.Transform);
             base.Draw(gameTime);
-            repo.Draw();
+            repo.Draw(spriteBatch, Font);
             spriteBatch.End();
         }
     }
