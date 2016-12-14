@@ -64,6 +64,9 @@ namespace GameHSeSurvival
             repo.Teachers.Add(teacher_2);
             var teacher_3 = new Teacher(teacher2, new Vector2(4544, ground_level - teacher2.Height - 192), spriteBatch);
             repo.Teachers.Add(teacher_3);
+            Texture2D coin = Content.Load<Texture2D>("монетка.png");
+            repo.Method(coin, spriteBatch);
+            
         }
 
         /// <summary>
@@ -89,6 +92,7 @@ namespace GameHSeSurvival
             camera.Update(player.Sprite_vector, board.columns * 64, board.rows * 64);
             board.Update();
             repo.Collisions(player);
+            repo.CollisionsCoins(player);
         }
 
         /// <summary>
@@ -110,6 +114,7 @@ namespace GameHSeSurvival
             //spriteBatch.DrawString(debugfont, helloWords, new Vector2(-400, 40), Color.White);
             player.Draw();
             repo.DrawTeacher(spriteBatch);
+            repo.Draw();
             spriteBatch.End();
         }
     }
