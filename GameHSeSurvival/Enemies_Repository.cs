@@ -19,13 +19,25 @@ namespace GameHSeSurvival
                 Teachers[i].Draw();
             }
         }
-        public void Collisions(Player pl)
+        public void Collisions(Player player)
         {
             for (int i = 0; i < Teachers.Count(); i++)
             {
-                if (Teachers[i].IsTop(pl))
-                { Teachers.RemoveAt(i); pl.move -= Vector2.UnitY * 25f; }
-                if (Teachers[i].IsLaterally(pl)) pl.Sprite_vector = new Vector2(550, 576 - pl.Sprite_texture.Height);
+                if  (Teachers[i].HurtOrKilledBy(player)[0])
+                {
+                    Teachers.Remove(Teachers[i]);
+                    i--;
+                    player.move -= Vector2.UnitY * 25f;
+                    break;
+                }
+
+                if (Teachers[i].HurtOrKilledBy(player)[1])
+                {
+                    player.Sprite_vector = new Vector2(550, 576 - player.Sprite_texture.Height);
+                    break;
+                }
+                if (Teachers[i].HurtOrKilledBy(player)[0] == false && Teachers[i].HurtOrKilledBy(player)[1] == false)
+                { }
             }
         }
         #endregion

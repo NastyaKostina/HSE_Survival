@@ -35,28 +35,33 @@ namespace GameHSeSurvival
             }
         }
         #region Collision
-        public bool IsLaterally(Player player)
+        public bool[] HurtOrKilledBy(Player player)
         {
-            // return (rectangle.Intersects(player.rectangle) && Sprite_vector.Y != player.Sprite_vector.Y + player.Sprite_texture.Height);
+            bool[] WhatToDo = new bool[2];
+            WhatToDo[0] = false; WhatToDo[1] = false; // WhatToDo[0] - KILL THE TEACHER; WhatToDo[1] - KILL THE PLAYER
             Rectangle onePixelDown = player.rectangle;
-            if (onePixelDown.Intersects(rectangle) && !((int)player.Sprite_vector.Y + player.rectangle.Height == (int)Sprite_vector.Y))
-                return true;
-            else return false;
-        }
-        public bool IsTop(Sprite player)
-        {
-            // return Sprite_vector.Y == player.Sprite_vector.Y +  player.Sprite_texture.Height && rectangle.Intersects(player.rectangle);
-            Rectangle onePixelDown = player.rectangle;
-            Rectangle onePixelLeft = player.rectangle;
-            Rectangle onePixelRight = player.rectangle;
+            Rectangle fourPixelLeft = player.rectangle;
+            Rectangle fourPixelRight = player.rectangle;
             onePixelDown.Offset(0, 1);
-            //  onePixelLeft.Offset(-1, 0);
-            // onePixelRight.Offset(1, 0);
-            if (onePixelDown.Intersects(rectangle) && (int)player.Sprite_vector.Y + player.rectangle.Height == (int)Sprite_vector.Y) //&& !onePixelLeft.Intersects(rectangle) && !onePixelRight.Intersects(rectangle))
-                return true;
-            else
-                return false;
+            fourPixelLeft.Offset(-4, 0);
+            fourPixelRight.Offset(4, 0);
+            if (onePixelDown.Intersects(rectangle))
+            {
+                if (onePixelDown.Intersects(rectangle) &&
+                    player.rectangle.Bottom >= rectangle.Top && // пересеклись сверху
+                    (player.rectangle.X >= rectangle.X - rectangle.Width || // наехал на учителя слева
+                    (player.rectangle.X >= rectangle.X && player.rectangle.X <= rectangle.X + rectangle.Width)) && // наехал на учителя справа
+                    (fourPixelLeft.Right > rectangle.Left && fourPixelRight.Left < rectangle.Right)) // а учитель по бокам-то всё видит
+                {
+                    WhatToDo[0] = true;
+                }
+                else// if (onePixelDown.Intersects(rectangle) && !(player.rectangle.Bottom >= rectangle.Top))
+                {
+                    WhatToDo[1] = true;
+                }
+            }
+            return WhatToDo;
         }
-        #endregion
-    }
+    #endregion
+}
 }
