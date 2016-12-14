@@ -73,9 +73,9 @@
 /processorParam:TextureFormat=Color
 /build:монетка.png
 
-#begin Font
+#begin Font.spritefont
 /importer:FontDescriptionImporter
 /processor:FontDescriptionProcessor
 /processorParam:TextureFormat=Compressed
-/build:Font
+/build:Font.spritefont
 
