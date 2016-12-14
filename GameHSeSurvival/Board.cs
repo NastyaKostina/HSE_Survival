@@ -1,4 +1,4 @@
-﻿using Microsoft.Xna.Framework;
+﻿using Microsoft.Xna.Framework; // Настя, привет.
 using Microsoft.Xna.Framework.Graphics;
 using System;
 using System.Collections.Generic;
