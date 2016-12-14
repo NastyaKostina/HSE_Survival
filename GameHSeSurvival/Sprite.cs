@@ -35,13 +35,27 @@ namespace GameHSeSurvival
             }
         }
         #region Collision
-        public bool IsLaterally(Sprite sprite)
+        public bool IsLaterally(Player player)
         {
-            return this.rectangle.Right == sprite.rectangle.Left || this.rectangle.Left == sprite.rectangle.Right;
+            // return (rectangle.Intersects(player.rectangle) && Sprite_vector.Y != player.Sprite_vector.Y + player.Sprite_texture.Height);
+            Rectangle onePixelDown = player.rectangle;
+            if (onePixelDown.Intersects(rectangle) && !((int)player.Sprite_vector.Y + player.rectangle.Height == (int)Sprite_vector.Y))
+                return true;
+            else return false;
         }
-        public bool IsTop(Sprite sprite)
+        public bool IsTop(Sprite player)
         {
-            return this.rectangle.Top <= sprite.rectangle.Bottom && this.rectangle.Intersects(sprite.rectangle);
+            // return Sprite_vector.Y == player.Sprite_vector.Y +  player.Sprite_texture.Height && rectangle.Intersects(player.rectangle);
+            Rectangle onePixelDown = player.rectangle;
+            Rectangle onePixelLeft = player.rectangle;
+            Rectangle onePixelRight = player.rectangle;
+            onePixelDown.Offset(0, 1);
+            //  onePixelLeft.Offset(-1, 0);
+            // onePixelRight.Offset(1, 0);
+            if (onePixelDown.Intersects(rectangle) && (int)player.Sprite_vector.Y + player.rectangle.Height == (int)Sprite_vector.Y) //&& !onePixelLeft.Intersects(rectangle) && !onePixelRight.Intersects(rectangle))
+                return true;
+            else
+                return false;
         }
         #endregion
     }

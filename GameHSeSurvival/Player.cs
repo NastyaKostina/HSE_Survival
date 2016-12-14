@@ -97,6 +97,6 @@ namespace GameHSeSurvival
             Vector2 lastMovement = Sprite_vector - oldPosition;
             if (lastMovement.X == 0) { move *= Vector2.UnitY; }
             if (lastMovement.Y == 0) { move *= Vector2.UnitX; }
-        }
+        } 
     }
 }
