@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 
 namespace GameHSeSurvival
 {
+    
     class Player:Sprite
     {
         public Vector2 move { get; set; }

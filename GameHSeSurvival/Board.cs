@@ -10,13 +10,14 @@ namespace GameHSeSurvival
 {
     class Board
     {
-        public Block[,] blocks { get; set; }
-        public int columns { get; set; }
+        public Block[,] blocks { get; set; } //massiv of blocks
+        public int columns { get; set; } 
         public int rows { get; set; }
         public Texture2D block_texture { get; set; }
         private SpriteBatch sb { get; set; }
-        public static Board CurrentBoard { get; private set; }
-
+        //cause the game has only one level therefore there is just one map
+        public static Board CurrentBoard { get; private set; } 
+        //ctor converts screen to massiv of blocks
         public Board(SpriteBatch sb, Texture2D block_texture, int columns, int rows)
         {
             this.sb = sb;
@@ -34,7 +35,7 @@ namespace GameHSeSurvival
                     blocks[i, j] = new Block(block_texture, position, sb, false, false, 0);
                 }
             }
-            FunctionsOfBlocks();
+            FunctionsOfBlocks(); //fill up blocks
             Board.CurrentBoard = this;
         }
         private void FunctionsOfBlocks()
@@ -83,6 +84,7 @@ namespace GameHSeSurvival
                 }
             }
         }
+        //draw blocks
         public void Draw()
         {
             foreach (var block in blocks)
@@ -183,7 +185,7 @@ namespace GameHSeSurvival
         {
             return new Rectangle((int)positionToMove.X, (int)positionToMove.Y, width, height);
         }
-        public void Update()
+        public void Update() 
         {
             Block[,] blocks = Board.CurrentBoard.blocks;
             foreach (var block in blocks)
@@ -202,5 +204,6 @@ namespace GameHSeSurvival
                 }
             }
         }
+
     }
 }

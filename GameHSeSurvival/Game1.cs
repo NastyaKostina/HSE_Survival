@@ -12,15 +12,11 @@ namespace GameHSeSurvival
     {
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
+        
 
-        const int ground_level = 576;
-
-        private Player player;
-        private Board board;
+        
         private Camera camera;
         private Enemies_Repository repo = new Enemies_Repository();
-
-        private SpriteFont debugfont;
         
         public Game1()
         {
@@ -52,21 +48,11 @@ namespace GameHSeSurvival
             spriteBatch = new SpriteBatch(GraphicsDevice);
             camera = new Camera(GraphicsDevice.Viewport);
             Texture2D player_texture = Content.Load<Texture2D>("студент.png");
-            player = new Player(player_texture, new Vector2(550, ground_level - player_texture.Height), spriteBatch); //sounds
             Texture2D block_texture = Content.Load<Texture2D>("блок.png");
-            board = new Board(spriteBatch, block_texture, 87, 10);
-
-            Texture2D teacher1 = Content.Load<Texture2D>("учитель.png");
-            Texture2D teacher2 = Content.Load<Texture2D>("учительница.png");
-            var teacher_1 = new Teacher(teacher1, new Vector2(3840, ground_level - teacher1.Height), spriteBatch);
-            repo.Teachers.Add(teacher_1);
-            var teacher_2 = new Teacher(teacher2, new Vector2(3200, ground_level - teacher2.Height), spriteBatch);
-            repo.Teachers.Add(teacher_2);
-            var teacher_3 = new Teacher(teacher2, new Vector2(4544, ground_level - teacher2.Height - 192), spriteBatch);
-            repo.Teachers.Add(teacher_3);
-            Texture2D coin = Content.Load<Texture2D>("монетка.png");
-            repo.Method(coin, spriteBatch);
-            
+            Texture2D teacher1_texture = Content.Load<Texture2D>("учитель.png");
+            Texture2D teacher2_texture = Content.Load<Texture2D>("учительница.png");
+            Texture2D coin_texture = Content.Load<Texture2D>("монетка.png");
+            repo.SetValues(player_texture, block_texture, teacher1_texture, teacher2_texture, coin_texture, spriteBatch);
         }
 
         /// <summary>
@@ -88,11 +74,11 @@ namespace GameHSeSurvival
                 Exit();
 
             base.Update(gameTime);
-            player.Update(gameTime);
-            camera.Update(player.Sprite_vector, board.columns * 64, board.rows * 64);
-            board.Update();
-            repo.Collisions(player);
-            repo.CollisionsCoins(player);
+            repo.Player.Update(gameTime);
+            camera.Update(repo.Player.Sprite_vector, repo.Board.columns * 64, repo.Board.rows * 64);
+            repo.Board.Update();
+            repo.CollisionsTeachers();
+            repo.CollisionsCoins();
         }
 
         /// <summary>
@@ -110,10 +96,6 @@ namespace GameHSeSurvival
                               null, null, null, null,
                               camera.Transform);
             base.Draw(gameTime);
-            board.Draw();
-            //spriteBatch.DrawString(debugfont, helloWords, new Vector2(-400, 40), Color.White);
-            player.Draw();
-            repo.DrawTeacher(spriteBatch);
             repo.Draw();
             spriteBatch.End();
         }
