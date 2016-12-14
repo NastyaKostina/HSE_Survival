@@ -18,6 +18,7 @@ namespace GameHSeSurvival
         private Player player;
         private Board board;
         private Camera camera;
+        private Enemies_Repository repo = new Enemies_Repository();
 
         private SpriteFont debugfont;
         
@@ -50,7 +51,6 @@ namespace GameHSeSurvival
         {
             spriteBatch = new SpriteBatch(GraphicsDevice);
             camera = new Camera(GraphicsDevice.Viewport);
-            debugfont = Content.Load<SpriteFont>("DebugFont");
             Texture2D player_texture = Content.Load<Texture2D>("студент.png");
             player = new Player(player_texture, new Vector2(550, ground_level - player_texture.Height), spriteBatch); //sounds
             Texture2D block_texture = Content.Load<Texture2D>("блок.png");
@@ -58,6 +58,12 @@ namespace GameHSeSurvival
 
             Texture2D teacher1 = Content.Load<Texture2D>("учитель.png");
             Texture2D teacher2 = Content.Load<Texture2D>("учительница.png");
+            var teacher_1 = new Teacher(teacher1, new Vector2(3840, ground_level - teacher1.Height), spriteBatch);
+            repo.Teachers.Add(teacher_1);
+            var teacher_2 = new Teacher(teacher2, new Vector2(3200, ground_level - teacher2.Height), spriteBatch);
+            repo.Teachers.Add(teacher_2);
+            var teacher_3 = new Teacher(teacher2, new Vector2(4544, ground_level - teacher2.Height - 192), spriteBatch);
+            repo.Teachers.Add(teacher_3);
         }
 
         /// <summary>
@@ -81,6 +87,7 @@ namespace GameHSeSurvival
             base.Update(gameTime);
             player.Update(gameTime);
             camera.Update(player.Sprite_vector, board.columns * 64, board.rows * 64);
+            repo.Collisions(player);
         }
 
         /// <summary>
@@ -89,8 +96,7 @@ namespace GameHSeSurvival
         /// <param name="gameTime">Provides a snapshot of timing values.</param>
         protected override void Draw(GameTime gameTime)
         {
-            string helloWords = string.Format("Created by\nNastya Kostina\nand\nVasiliy Sdobnov\n\n\nWe are so glad\nyou decided to play\nthis disaster.\n\n\nSpace - Jump\n<- - Move Left\n-> - Move Right");//\nWe are so glad\nyou decided to play\nthis disaster.\nPress right and left\n\to replace Mario.\nSpace for jumping.");
-
+            
             GraphicsDevice.Clear(Color.CornflowerBlue);
             spriteBatch.Begin(SpriteSortMode.Deferred,
                               BlendState.AlphaBlend,
@@ -98,8 +104,8 @@ namespace GameHSeSurvival
                               camera.Transform);
             base.Draw(gameTime);
             board.Draw();
-            spriteBatch.DrawString(debugfont, helloWords, new Vector2(-400, 40), Color.White);
             player.Draw();
+            repo.DrawTeacher();
             spriteBatch.End();
         }
     }
