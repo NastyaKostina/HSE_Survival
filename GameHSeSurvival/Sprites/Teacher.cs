@@ -23,7 +23,7 @@ namespace GameHSeSurvival
                 if (this.HurtOrKilledBy(player)[0])
                 {
                 DeleteTeacherEvent?.Invoke(this);
-               // player.move -= Vector2.UnitY * 25f;
+                player.Movements.move -= Vector2.UnitY * 25f;
                 player.Score += 5;
                 return true;
                 }
