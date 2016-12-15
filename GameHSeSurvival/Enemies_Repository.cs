@@ -20,6 +20,7 @@ namespace GameHSeSurvival
         Board _Board;
         Hat _Hat;
         Monster _Monster;
+        List<Question> _Questions;
 
         public List<Teacher> Teachers
         {
@@ -34,6 +35,14 @@ namespace GameHSeSurvival
             get
             {
                 return _Coins;
+            }
+        }
+
+        public List<Question> Questions
+        {
+            get
+            {
+                return _Questions;
             }
         }
 
