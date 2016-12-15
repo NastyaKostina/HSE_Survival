@@ -128,7 +128,7 @@ namespace GameHSeSurvival
             _Teachers.Add(new Teacher(teacher1_texture, new Vector2(3840, ground_level - teacher1_texture.Height), spriteBatch));
             _Teachers.Add(new Teacher(teacher2_texture, new Vector2(3200, ground_level - teacher2_texture.Height), spriteBatch));
             _Teachers.Add(new Teacher(teacher2_texture, new Vector2(4672, ground_level - teacher2_texture.Height - 192), spriteBatch));
-            _Hat = new Hat(hat_texture, new Vector2(82*64, ground_level - hat_texture.Height), spriteBatch);
+            _Hat = new Hat(hat_texture, new Vector2(85*64, ground_level - hat_texture.Height), spriteBatch);
             Player.Score = 0;
         }
 
