@@ -166,7 +166,6 @@ namespace GameHSeSurvival
 
         public void Draw(SpriteBatch spriteBatch, SpriteFont Font)
         {
-            spriteBatch.DrawString(Font, Convert.ToString(Player.Score), new Vector2(Player.Sprite_vector.X - 7*64, 64), Color.Azure);
             Player.Draw();
             Board.Draw();
             for (int i = 0; i < Teachers.Count(); i++)
@@ -178,6 +177,7 @@ namespace GameHSeSurvival
                 item.Draw();
             }
             Hat.Draw();
+            spriteBatch.DrawString(Font, Convert.ToString("TVOY NAKOP: " + Player.Score), new Vector2(Player.Sprite_vector.X, Player.Sprite_vector.Y - 30), Color.Azure);//new Vector2(Player.Sprite_vector.X - 7*64, 64), Color.Azure);
         }
     }
 }
