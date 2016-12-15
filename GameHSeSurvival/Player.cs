@@ -15,7 +15,10 @@ namespace GameHSeSurvival
         public Vector2 move { get; set; }
         private Vector2 oldPosition;
         //public List<SoundEffect> sound_effects;
-        public List<int> Score = new List<int>();
+        private int _Score;
+
+        public int Score { get; set; }  
+
         Vector2 changeposition;
 
         public Player(Texture2D texture, Vector2 position, SpriteBatch spritebatch) //List<SoundEffect> sounds)
@@ -23,7 +26,6 @@ namespace GameHSeSurvival
         {
             //sound_effects = sounds;
         }
-
         public void Update(GameTime gameTime)
         {
             KeyboardAction();
@@ -98,6 +100,8 @@ namespace GameHSeSurvival
             Vector2 lastMovement = Sprite_vector - oldPosition;
             if (lastMovement.X == 0) { move *= Vector2.UnitY; }
             if (lastMovement.Y == 0) { move *= Vector2.UnitX; }
-        } 
+        }
+        
+       
     }
 }

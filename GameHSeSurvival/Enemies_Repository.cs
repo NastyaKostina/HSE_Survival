@@ -8,9 +8,12 @@ using System.Threading.Tasks;
 
 namespace GameHSeSurvival
 {
+    
     class Enemies_Repository:IRepository
     {
+        
         const int ground_level = 576;
+
         public List<Teacher> _Teachers = new List<Teacher>();
         List<Coin> _Coins = new List<Coin>();
         Player _Player;
@@ -106,7 +109,7 @@ namespace GameHSeSurvival
             _Teachers.Add(new Teacher(teacher1_texture, new Vector2(3840, ground_level - teacher1_texture.Height), spriteBatch));
             _Teachers.Add(new Teacher(teacher2_texture, new Vector2(3200, ground_level - teacher2_texture.Height), spriteBatch));
             _Teachers.Add(new Teacher(teacher2_texture, new Vector2(4544, ground_level - teacher2_texture.Height - 192), spriteBatch));
-
+            Player.Score = 0;
         }
 
 
@@ -117,13 +120,17 @@ namespace GameHSeSurvival
         //        Teachers[i].Draw();
         //    }
         //}
+        
         public void CollisionsTeachers()
         {
             for (int i = 0; i < Teachers.Count(); i++)
             {
                 if (Teachers[i].IsTop(Player))
-                { Teachers.RemoveAt(i); Player.move -= Vector2.UnitY * 25f; }
-                if (Teachers[i].IsLaterally(Player)) Player.Sprite_vector = new Vector2(550, 576 - Player.Sprite_texture.Height);
+                { Teachers.RemoveAt(i); Player.move -= Vector2.UnitY * 25f; Player.Score += 5; }
+                if (Teachers[i].IsLaterally(Player))
+                { Player.Sprite_vector = new Vector2(550, 576 - Player.Sprite_texture.Height);
+                    Player.Score = 0;
+                }
             }
         }
         
@@ -132,12 +139,16 @@ namespace GameHSeSurvival
             for (int i = 0; i < _Coins.Count; i ++)
             {
                 if (Player.rectangle.Intersects(_Coins[i].rectangle))
+                {
                     _Coins.RemoveAt(i);
+                    Player.Score += 1;
+                }
             }
         }
 
-        public void Draw()
+        public void Draw(SpriteBatch spriteBatch, SpriteFont Font)
         {
+            spriteBatch.DrawString(Font, Convert.ToString(Player.Score), new Vector2(Player.Sprite_vector.X - 7*64, 64), Color.Azure);
             Player.Draw();
             Board.Draw();
             for (int i = 0; i < Teachers.Count(); i++)
