@@ -100,6 +100,7 @@ namespace GameHSeSurvival
             base.Draw(gameTime);
             repo.Draw(spriteBatch, Font);
             spriteBatch.End();
+            
         }
     }
 }

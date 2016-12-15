@@ -66,6 +66,9 @@
     <Content Include="Content\монетка.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="Content\монстр.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="Content\студент.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
