@@ -8,9 +8,9 @@ using System.Threading.Tasks;
 
 namespace GameHSeSurvival
 {
-    class Teacher : Sprite
+    class Monster : Sprite
     {
-        public Teacher(Texture2D texture, Vector2 position, SpriteBatch spritebatch)
+        public Monster(Texture2D texture, Vector2 position, SpriteBatch spritebatch)
             : base(texture, position, spritebatch)
         {
         }

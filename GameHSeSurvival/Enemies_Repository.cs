@@ -19,6 +19,8 @@ namespace GameHSeSurvival
         Player _Player;
         Board _Board;
         Hat _Hat;
+        Monster _Monster;
+
         public List<Teacher> Teachers
         {
             get
@@ -50,6 +52,7 @@ namespace GameHSeSurvival
                 return _Board;
             }
         }
+
         public Hat Hat
         {
             get
@@ -57,6 +60,15 @@ namespace GameHSeSurvival
                 return _Hat;
             }
         }
+
+        public Monster Monster
+        {
+            get
+            {
+                return _Monster;
+            }
+        }
+
         int[,] coins = new int[87, 10];
         public void CoinsCoordinates()
         {
