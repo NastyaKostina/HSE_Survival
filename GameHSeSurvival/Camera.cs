@@ -23,13 +23,15 @@ namespace GameHSeSurvival
 
         public void Update(Vector2 position, int x, int y)
         {
-            if (position.X < viewport.Width / 2) { center.X = viewport.X / 2; }
+            if (position.X < viewport.Width / 2)
+            { center.X = viewport.Width / 2; }
             else if (position.X > x - (viewport.Width / 2)) { center.X = x - (viewport.Width / 2); }
             else center.X = position.X;
 
             // if (position.Y < viewport.Height / 2) { center.Y = viewport.Y / 2; }
-            if (position.Y > y - (viewport.Height / 2)) { center.Y = y - (viewport.Height / 2); }
-            else center.Y = position.Y;
+            // if (position.Y > y - (viewport.Height / 2)) { center.Y = y - (viewport.Height / 2); }
+            // else center.Y = position.Y;
+            center.Y = viewport.Height / 2;
 
             transform = Matrix.CreateTranslation(new Vector3(-center.X + (viewport.Width / 2),
                                                              -center.Y + (viewport.Height / 2),
