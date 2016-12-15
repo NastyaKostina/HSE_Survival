@@ -52,7 +52,8 @@ namespace GameHSeSurvival
             Texture2D teacher1_texture = Content.Load<Texture2D>("учитель.png");
             Texture2D teacher2_texture = Content.Load<Texture2D>("учительница.png");
             Texture2D coin_texture = Content.Load<Texture2D>("монетка.png");
-            repo.SetValues(player_texture, block_texture, teacher1_texture, teacher2_texture, coin_texture, spriteBatch);
+            Texture2D hat_texture = Content.Load<Texture2D>("шапочка.png");
+            repo.SetValues(player_texture, block_texture, teacher1_texture, teacher2_texture, coin_texture,hat_texture,spriteBatch);
             Font = Content.Load<SpriteFont>("Font");
             
         }

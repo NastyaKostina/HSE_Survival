@@ -18,6 +18,7 @@ namespace GameHSeSurvival
         List<Coin> _Coins = new List<Coin>();
         Player _Player;
         Board _Board;
+        Hat _Hat;
         public List<Teacher> Teachers
         {
             get
@@ -49,7 +50,13 @@ namespace GameHSeSurvival
                 return _Board;
             }
         }
-
+        public Hat Hat
+        {
+            get
+            {
+                return _Hat;
+            }
+        }
         int[,] coins = new int[87, 10];
         public void CoinsCoordinates()
         {
@@ -92,7 +99,7 @@ namespace GameHSeSurvival
             coins[81, 8] = 1;
         }
 
-        public void SetValues(Texture2D player_texture, Texture2D block_texture, Texture2D teacher1_texture, Texture2D teacher2_texture, Texture2D coin_texture, SpriteBatch spriteBatch)
+        public void SetValues(Texture2D player_texture, Texture2D block_texture, Texture2D teacher1_texture, Texture2D teacher2_texture, Texture2D coin_texture, Texture2D hat_texture, SpriteBatch spriteBatch)
         {
             _Player = new Player(player_texture, new Vector2(550, ground_level - player_texture.Height), spriteBatch);
             _Board = new Board(spriteBatch, block_texture, 87, 10);
@@ -108,7 +115,8 @@ namespace GameHSeSurvival
 
             _Teachers.Add(new Teacher(teacher1_texture, new Vector2(3840, ground_level - teacher1_texture.Height), spriteBatch));
             _Teachers.Add(new Teacher(teacher2_texture, new Vector2(3200, ground_level - teacher2_texture.Height), spriteBatch));
-            _Teachers.Add(new Teacher(teacher2_texture, new Vector2(4544, ground_level - teacher2_texture.Height - 192), spriteBatch));
+            _Teachers.Add(new Teacher(teacher2_texture, new Vector2(4672, ground_level - teacher2_texture.Height - 192), spriteBatch));
+            _Hat = new Hat(hat_texture, new Vector2(82*64, ground_level - hat_texture.Height), spriteBatch);
             Player.Score = 0;
         }
 
@@ -136,6 +144,7 @@ namespace GameHSeSurvival
                 if (Teachers[i].HurtOrKilledBy(player)[1])
                 {
                     player.Sprite_vector = new Vector2(550, 576 - player.Sprite_texture.Height);
+                    Player.Score += 5;
                     break;
                 }
                 if (Teachers[i].HurtOrKilledBy(player)[0] == false && Teachers[i].HurtOrKilledBy(player)[1] == false)
@@ -168,6 +177,7 @@ namespace GameHSeSurvival
             {
                 item.Draw();
             }
+            Hat.Draw();
         }
     }
 }
