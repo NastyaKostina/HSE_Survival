@@ -25,6 +25,7 @@ namespace GameHSeSurvival
             MovingBlockChecking(player); // ПРОВЕРКА ДВИГАЮЩИХСЯ БЛОКОВ
             IsPlayerUnderGround(player);
         }
+        #region Movements_Right_Left_Jump
         private void KeyboardAction(Player player) //movements
         {
             KeyboardState keyboardState = Keyboard.GetState();
@@ -58,7 +59,8 @@ namespace GameHSeSurvival
             if (lastMovement.X == 0) { move *= Vector2.UnitY; }
             if (lastMovement.Y == 0) { move *= Vector2.UnitX; }
         }
-
+        #endregion
+        #region Is_standing_on_the_moving_platform
         private void MovingBlockChecking(Player player)
         {
             if (IsMovingBlockOnTheRightSide(player)) { player.Sprite_vector = new Vector2(player.Sprite_vector.X - 2, player.Sprite_vector.Y); }
@@ -92,12 +94,16 @@ namespace GameHSeSurvival
             onePixelLefter.Offset(-1, 0);
             return !Board.CurrentBoard.HasSpaceToJumpFromTheRightSide(player, onePixelLefter);
         }
+        #endregion
+        #region Is_player_underground
         private void IsPlayerUnderGround(Player player)
         {
             if (player.Sprite_vector.Y >= Board.CurrentBoard.rows * Board.CurrentBoard.block_texture.Height)
             {
                 player.Sprite_vector = new Vector2(550, 576 - player.Sprite_texture.Height);
+                player.Score = 0;
             }
         }
+        #endregion
     }
 }

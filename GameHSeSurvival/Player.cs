@@ -13,8 +13,6 @@ namespace GameHSeSurvival
     
     class Player:Sprite
     {
-        
-        private int _Score;
         PlayerMovementSystem Movements = new PlayerMovementSystem();
         public Vector2 move;
         public int Score { get; set; }  

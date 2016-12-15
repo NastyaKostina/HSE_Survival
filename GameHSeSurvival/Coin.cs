@@ -10,9 +10,21 @@ namespace GameHSeSurvival
 {
     class Coin:Sprite
     {
+        public delegate void DeleteCoin(Coin coin);
+        public event DeleteCoin DeleteCoinEvent;
         public Coin(Texture2D texture, Vector2 position, SpriteBatch spritebatch)
             : base(texture, position, spritebatch)
         {
+        }
+        public override bool Collision(Player player)
+        {
+                if (player.rectangle.Intersects(this.rectangle))
+                {
+                DeleteCoinEvent?.Invoke(this);
+                player.Score += 1;
+                return true;
+            }
+            return false;
         }
     }
 }

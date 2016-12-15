@@ -12,5 +12,6 @@ namespace GameHSeSurvival
         List<Coin> Coins { get;}
         Player Player { get;}
         Board Board { get;}
+        Hat Hat { get; }
     }
 }

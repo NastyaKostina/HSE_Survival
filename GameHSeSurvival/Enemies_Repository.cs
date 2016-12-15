@@ -19,8 +19,6 @@ namespace GameHSeSurvival
         Player _Player;
         Board _Board;
         Hat _Hat;
-        Monster _Monster;
-        List<Question> _Questions;
 
         public List<Teacher> Teachers
         {
@@ -37,15 +35,6 @@ namespace GameHSeSurvival
                 return _Coins;
             }
         }
-
-        public List<Question> Questions
-        {
-            get
-            {
-                return _Questions;
-            }
-        }
-
         public Player Player
         {
             get
@@ -67,14 +56,6 @@ namespace GameHSeSurvival
             get
             {
                 return _Hat;
-            }
-        }
-
-        public Monster Monster
-        {
-            get
-            {
-                return _Monster;
             }
         }
 
@@ -139,8 +120,21 @@ namespace GameHSeSurvival
             _Teachers.Add(new Teacher(teacher2_texture, new Vector2(4672, ground_level - teacher2_texture.Height - 192), spriteBatch));
             _Hat = new Hat(hat_texture, new Vector2(85*64, ground_level - hat_texture.Height), spriteBatch);
             Player.Score = 0;
+            
         }
-
+        public void Collisisons()
+        {
+            foreach (var item in Teachers)
+            {
+                item.DeleteTeacherEvent += e => Teachers.Remove(e);
+                if(item.Collision(Player)) break;
+            }
+            foreach (var item in Coins)
+            {
+                item.DeleteCoinEvent += e => Coins.Remove(e);
+                if(item.Collision(Player)) break;
+            }
+        }
 
         //public void DrawTeacher(SpriteBatch sb)
         //{
@@ -149,41 +143,40 @@ namespace GameHSeSurvival
         //        Teachers[i].Draw();
         //    }
         //}
-        
-        public void CollisionsTeachers(Player player)
-        {
-            for (int i = 0; i < Teachers.Count(); i++)
-            {
-                if (Teachers[i].HurtOrKilledBy(player)[0])
-                {
-                    Teachers.Remove(Teachers[i]);
-                    i--;
-                    player.move -= Vector2.UnitY * 25f;
-                    Player.Score += 5;
-                    break;
-                }
+        //public void CollisionsTeachers(Player player)
+        //{
+        //    for (int i = 0; i < Teachers.Count(); i++)
+        //    {
+        //        if (Teachers[i].HurtOrKilledBy(player)[0])
+        //        {
+        //            Teachers.Remove(Teachers[i]);
+        //            i--;
+        //            player.move -= Vector2.UnitY * 25f;
+        //            Player.Score += 5;
+        //            break;
+        //        }
 
-                if (Teachers[i].HurtOrKilledBy(player)[1])
-                {
-                    player.Sprite_vector = new Vector2(550, 576 - player.Sprite_texture.Height);
-                    break;
-                }
-                if (Teachers[i].HurtOrKilledBy(player)[0] == false && Teachers[i].HurtOrKilledBy(player)[1] == false)
-                { }
-            }
-        }
+        //        if (Teachers[i].HurtOrKilledBy(player)[1])
+        //        {
+        //            player.Sprite_vector = new Vector2(550, 576 - player.Sprite_texture.Height);
+        //            break;
+        //        }
+        //        if (Teachers[i].HurtOrKilledBy(player)[0] == false && Teachers[i].HurtOrKilledBy(player)[1] == false)
+        //        { }
+        //    }
+        //}
         
-        public void CollisionsCoins()
-        {
-            for (int i = 0; i < _Coins.Count; i ++)
-            {
-                if (Player.rectangle.Intersects(_Coins[i].rectangle))
-                {
-                    _Coins.RemoveAt(i);
-                    Player.Score += 1;
-                }
-            }
-        }
+        //public void CollisionsCoins()
+        //{
+        //    for (int i = 0; i < _Coins.Count; i ++)
+        //    {
+        //        if (Player.rectangle.Intersects(_Coins[i].rectangle))
+        //        {
+        //            _Coins.RemoveAt(i);
+        //            Player.Score += 1;
+        //        }
+        //    }
+        //}
 
         public void Draw(SpriteBatch spriteBatch, SpriteFont Font)
         {
