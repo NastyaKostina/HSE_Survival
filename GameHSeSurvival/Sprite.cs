@@ -66,7 +66,7 @@ namespace GameHSeSurvival
                         player.rectangle.Bottom >= rectangle.Top && // пересеклись сверху
                         (player.rectangle.X >= rectangle.X - rectangle.Width || // наехал на учителя слева
                         (player.rectangle.X >= rectangle.X && player.rectangle.X <= rectangle.X + rectangle.Width)) && // наехал на учителя справа
-                        ((fourPixelRight.Left - rectangle.Right) >= 4)) // а учитель по бокам-то всё видит
+                        (Math.Abs((fourPixelRight.Left - rectangle.Right)) >= 4)) // а учитель по бокам-то всё видит
                     {
                         WhatToDo[0] = true;
                     }
