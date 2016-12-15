@@ -16,7 +16,7 @@ namespace GameHSeSurvival
         SpriteFont Font;
         
         private Camera camera;
-        private Enemies_Repository repo = new Enemies_Repository();
+        private IRepository repo = new Enemies_Repository();
         
         public Game1()
         {
@@ -76,8 +76,8 @@ namespace GameHSeSurvival
                 Exit();
 
             base.Update(gameTime);
-            repo.Player.Update(gameTime);
             camera.Update(repo.Player.Sprite_vector, repo.Board.columns * 64, repo.Board.rows * 64);
+            repo.Player.Update(gameTime);
             repo.Board.Update();
             repo.Collisisons();
         }
