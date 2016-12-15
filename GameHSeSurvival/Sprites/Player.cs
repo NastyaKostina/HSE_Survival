@@ -13,8 +13,8 @@ namespace GameHSeSurvival
     
     class Player:Sprite
     {
-        public PlayerMovementSystem Movements = new PlayerMovementSystem();
-        public Vector2 move;
+        private PlayerMovementSystem Movements = new PlayerMovementSystem();
+        Vector2 move;
         public int Score { get; set; }  
 
         //Vector2 changeposition;
@@ -23,10 +23,10 @@ namespace GameHSeSurvival
         : base(texture, position, spritebatch)
         {
             //sound_effects = sounds;
+            move = Movements.move;
         }
         public void Update(GameTime gameTime)
         {
-            move = Movements.move;
             Movements.Move(gameTime, this);
             //MovingBlockChecking(); // ПРОВЕРКА ДВИГАЮЩИХСЯ БЛОКОВ
             //IsPlayerUnderGround();
