@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 
 namespace GameHSeSurvival
 {
@@ -34,6 +35,7 @@ namespace GameHSeSurvival
             move -= move * new Vector2(.1f, .1f);
             PossibleMoving(gameTime);
             StopMovingIfBlocked();
+            IsPlayerUnderGround();
         }
         private void KeyboardAction() //movements
         {
@@ -101,7 +103,12 @@ namespace GameHSeSurvival
             if (lastMovement.X == 0) { move *= Vector2.UnitY; }
             if (lastMovement.Y == 0) { move *= Vector2.UnitX; }
         }
-        
-       
+        private void IsPlayerUnderGround()
+        {
+            if (Sprite_vector.Y >= Board.CurrentBoard.rows * Board.CurrentBoard.block_texture.Height)
+            {
+                Sprite_vector = new Vector2(550, 576 - Sprite_texture.Height);
+            }
+        }
     }
 }
