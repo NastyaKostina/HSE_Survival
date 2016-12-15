@@ -177,7 +177,7 @@ namespace GameHSeSurvival
                 item.Draw();
             }
             Hat.Draw();
-            spriteBatch.DrawString(Font, Convert.ToString("TVOY NAKOP: " + Player.Score), new Vector2(Player.Sprite_vector.X, Player.Sprite_vector.Y - 30), Color.Azure);//new Vector2(Player.Sprite_vector.X - 7*64, 64), Color.Azure);
+            spriteBatch.DrawString(Font, Convert.ToString("NAKOPLENNAYA: " + 0.27 * Player.Score), new Vector2(Player.Sprite_vector.X - 30, Player.Sprite_vector.Y - 30), Color.Azure);//new Vector2(Player.Sprite_vector.X - 7*64, 64), Color.Azure);
         }
     }
 }

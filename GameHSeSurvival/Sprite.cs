@@ -55,7 +55,7 @@ namespace GameHSeSurvival
                 {
                     WhatToDo[0] = true;
                 }
-                else// if (onePixelDown.Intersects(rectangle) && !(player.rectangle.Bottom >= rectangle.Top))
+                else
                 {
                     WhatToDo[1] = true;
                 }
