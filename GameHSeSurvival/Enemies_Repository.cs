@@ -20,6 +20,7 @@ namespace GameHSeSurvival
         Board _Board;
         Hat _Hat;
         Monster _Monster;
+        List<Question> _Questions;
 
         public List<Teacher> Teachers
         {
@@ -34,6 +35,14 @@ namespace GameHSeSurvival
             get
             {
                 return _Coins;
+            }
+        }
+
+        public List<Question> Questions
+        {
+            get
+            {
+                return _Questions;
             }
         }
 
@@ -150,13 +159,13 @@ namespace GameHSeSurvival
                     Teachers.Remove(Teachers[i]);
                     i--;
                     player.move -= Vector2.UnitY * 25f;
+                    Player.Score += 5;
                     break;
                 }
 
                 if (Teachers[i].HurtOrKilledBy(player)[1])
                 {
                     player.Sprite_vector = new Vector2(550, 576 - player.Sprite_texture.Height);
-                    Player.Score += 5;
                     break;
                 }
                 if (Teachers[i].HurtOrKilledBy(player)[0] == false && Teachers[i].HurtOrKilledBy(player)[1] == false)

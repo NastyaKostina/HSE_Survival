@@ -47,15 +47,43 @@ namespace GameHSeSurvival
                 Rectangle fourPixelRight = player.rectangle;
                 fourPixelLeft.Offset(-4, 0);
                 fourPixelRight.Offset(4, 0);
-                if (onePixelDown.Intersects(rectangle) &&
-                    player.rectangle.Bottom >= rectangle.Top && // пересеклись сверху
-                    (player.rectangle.X >= rectangle.X - rectangle.Width || // наехал на учителя слева
-                    (player.rectangle.X >= rectangle.X && player.rectangle.X <= rectangle.X + rectangle.Width)) && // наехал на учителя справа
-                    ((fourPixelLeft.Right - rectangle.Left) >= 4 && (fourPixelRight.Left - rectangle.Right <= 4))) // а учитель по бокам-то всё видит
+
+                if (player.rectangle.X < rectangle.X)
                 {
-                    WhatToDo[0] = true;
+                    if (onePixelDown.Intersects(rectangle) &&
+                        player.rectangle.Bottom >= rectangle.Top && // пересеклись сверху
+                        (player.rectangle.X >= rectangle.X - rectangle.Width || // наехал на учителя слева
+                        (player.rectangle.X >= rectangle.X && player.rectangle.X <= rectangle.X + rectangle.Width)) && // наехал на учителя справа
+                        ((fourPixelLeft.Right - rectangle.Left) >= 4)) // а учитель по бокам-то всё видит
+                    {
+                        WhatToDo[0] = true;
+                    }
                 }
-                else
+
+                if (player.rectangle.X > rectangle.X)
+                {
+                    if (onePixelDown.Intersects(rectangle) &&
+                        player.rectangle.Bottom >= rectangle.Top && // пересеклись сверху
+                        (player.rectangle.X >= rectangle.X - rectangle.Width || // наехал на учителя слева
+                        (player.rectangle.X >= rectangle.X && player.rectangle.X <= rectangle.X + rectangle.Width)) && // наехал на учителя справа
+                        (Math.Abs((fourPixelRight.Left - rectangle.Right)) >= 4)) // а учитель по бокам-то всё видит
+                    {
+                        WhatToDo[0] = true;
+                    }
+                }
+
+                if (player.rectangle.X == rectangle.X)
+                {
+                    if (onePixelDown.Intersects(rectangle) &&
+                        player.rectangle.Bottom >= rectangle.Top && // пересеклись сверху
+                        (player.rectangle.X >= rectangle.X - rectangle.Width || // наехал на учителя слева
+                        (player.rectangle.X >= rectangle.X && player.rectangle.X <= rectangle.X + rectangle.Width)))
+                    {
+                        WhatToDo[0] = true;
+                    }
+                }
+
+                if (WhatToDo[0] == false)
                 {
                     WhatToDo[1] = true;
                 }
