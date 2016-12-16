@@ -63,8 +63,8 @@ namespace GameHSeSurvival
         #region Is_standing_on_the_moving_platform
         private void MovingBlockChecking(Player player)
         {
-            if (IsMovingBlockOnTheRightSide(player)) { player.Sprite_vector = new Vector2(player.Sprite_vector.X - 3, player.Sprite_vector.Y); move += new Vector2(-5f, 0); }// player.Sprite_vector = new Vector2(player.Sprite_vector.X - 3, player.Sprite_vector.Y ); }
-            if (IsMovingBlockOnTheLeftSide(player)) { player.Sprite_vector = new Vector2(player.Sprite_vector.X + 4, player.Sprite_vector.Y); move += new Vector2(5f, 0); }// player.Sprite_vector = new Vector2(player.Sprite_vector.X + 5.5f, player.Sprite_vector.Y); }
+            if (IsMovingBlockOnTheRightSide(player)) { player.Sprite_vector = new Vector2(player.Sprite_vector.X - 3, player.Sprite_vector.Y + 1); }
+            if (IsMovingBlockOnTheLeftSide(player)) { player.Sprite_vector = new Vector2(player.Sprite_vector.X + 7, player.Sprite_vector.Y + 1); }
             Rectangle onePixelDown = player.rectangle;
             Rectangle onePixelRight = player.rectangle;
             onePixelDown.Offset(0, 1);

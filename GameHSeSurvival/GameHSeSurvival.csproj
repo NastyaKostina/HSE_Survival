@@ -38,11 +38,12 @@
     <ApplicationIcon>Icon.ico</ApplicationIcon>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="BombQuestion.cs" />
+    <Compile Include="Interfaces\IRepositoryGeneral.cs" />
     <Compile Include="Sprites\Block.cs" />
     <Compile Include="Sprite Helpers\Board.cs" />
     <Compile Include="Camera.cs" />
     <Compile Include="Sprites\Coin.cs" />
-    <Compile Include="Interfaces\ISprite.cs" />
     <Compile Include="Sprites\Monster.cs" />
     <Compile Include="Enemies_Repository.cs" />
     <Compile Include="Game1.cs" />

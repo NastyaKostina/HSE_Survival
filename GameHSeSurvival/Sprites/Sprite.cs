@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace GameHSeSurvival
 {
-    class Sprite : ISprite
+    class Sprite
     {
         public Texture2D Sprite_texture { get; set; }
         public Vector2 Sprite_vector { get; set; }

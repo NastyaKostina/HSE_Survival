@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace GameHSeSurvival
 {
-    interface IRepository
+    interface IRepository : IRepositoryGeneral
     {
         List<Teacher> Teachers { get;}
         List<Coin> Coins { get;}
