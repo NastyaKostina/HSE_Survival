@@ -44,7 +44,6 @@
     <Compile Include="Sprite Helpers\Board.cs" />
     <Compile Include="Camera.cs" />
     <Compile Include="Sprites\Coin.cs" />
-    <Compile Include="Sprites\Monster.cs" />
     <Compile Include="Enemies_Repository.cs" />
     <Compile Include="Game1.cs" />
     <Compile Include="Sprites\Hat.cs" />
@@ -70,9 +69,6 @@
     <Content Include="Content\монетка.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="Content\монстр.png">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
     <Content Include="Content\студент.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
@@ -91,6 +87,7 @@
     <MonoGameContentReference Include="Content\Content.mgcb" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="ClassDiagram1.cd" />
     <None Include="Content\Font.spritefont">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>

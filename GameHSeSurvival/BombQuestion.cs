@@ -8,11 +8,15 @@ using System.Threading.Tasks;
 
 namespace GameHSeSurvival
 {
-    class Monster : Sprite
+    class BombQuestion:Sprite
     {
-        public Monster(Texture2D texture, Vector2 position, SpriteBatch spritebatch)
+        Random random = new Random();
+        bool IsRemoved;
+        public BombQuestion(Texture2D texture, Vector2 position, SpriteBatch spritebatch)
             : base(texture, position, spritebatch)
         {
+            position = new Vector2(random.Next(0, 960 - texture.Width), -640);
         }
+
     }
 }
