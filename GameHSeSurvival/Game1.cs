@@ -1,6 +1,7 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
+using System;
 using System.Collections.Generic;
 
 namespace GameHSeSurvival
@@ -14,7 +15,6 @@ namespace GameHSeSurvival
         SpriteBatch spriteBatch;
 
         SpriteFont Font;
-        
         private Camera camera;
         private IRepository repo = new Enemies_Repository();
         
@@ -97,9 +97,8 @@ namespace GameHSeSurvival
                               null, null, null, null,
                               camera.Transform);
             base.Draw(gameTime);
-            repo.Draw(spriteBatch, Font);
+            repo.Draw(spriteBatch, Font, gameTime);
             spriteBatch.End();
-            
         }
     }
 }

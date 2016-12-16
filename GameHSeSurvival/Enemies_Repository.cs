@@ -13,7 +13,7 @@ namespace GameHSeSurvival
     {
         
         const int ground_level = 576;
-
+        double timer;
         public List<Teacher> _Teachers = new List<Teacher>();
         List<Coin> _Coins = new List<Coin>();
         Player _Player;
@@ -178,7 +178,7 @@ namespace GameHSeSurvival
         //    }
         //}
 
-        public void Draw(SpriteBatch spriteBatch, SpriteFont Font)
+        public void Draw(SpriteBatch spriteBatch, SpriteFont Font, GameTime gameTime)
         {
             Player.Draw();
             Board.Draw();
@@ -191,7 +191,8 @@ namespace GameHSeSurvival
                 item.Draw();
             }
             Hat.Draw();
-            spriteBatch.DrawString(Font, Convert.ToString("NAKOPLENNAYA: " + 0.27 * Player.Score), new Vector2(Player.Sprite_vector.X - 30, Player.Sprite_vector.Y - 30), Color.Azure);//new Vector2(Player.Sprite_vector.X - 7*64, 64), Color.Azure);
+            spriteBatch.DrawString(Font, Convert.ToString("NAKOPLENNAYA: " + 0.27 * Player.Score), new Vector2(Player.Sprite_vector.X - 30, Player.Sprite_vector.Y - 30), Color.Azure);//new Vector2(Player.Sprite_vector.X - 7*64, 64), Color.Azure);           
+            spriteBatch.DrawString(Font, Convert.ToString("Time: " + Math.Round(timer += gameTime.ElapsedGameTime.TotalSeconds, 2)), new Vector2(Player.Sprite_vector.X - 12, Player.Sprite_vector.Y - 60), Color.Azure);
         }
     }
 }
