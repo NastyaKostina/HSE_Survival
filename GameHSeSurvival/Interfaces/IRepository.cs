@@ -16,7 +16,6 @@ namespace GameHSeSurvival
         Board Board { get;}
         Hat Hat { get; }
         void SetValues(Texture2D player_texture, Texture2D block_texture, Texture2D teacher1_texture, Texture2D teacher2_texture, Texture2D coin_texture, Texture2D hat_texture, SpriteBatch spriteBatch);
-        void Collisisons();
-        void Draw(SpriteBatch spriteBatch, SpriteFont Font, GameTime gametime);
+        
         }
 }
