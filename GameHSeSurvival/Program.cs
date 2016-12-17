@@ -1,4 +1,5 @@
 ﻿using System;
+using ScoresForm;
 
 namespace GameHSeSurvival
 {
@@ -15,7 +16,13 @@ namespace GameHSeSurvival
         static void Main()
         {
             using (var game = new Game1())
+            {
                 game.Run();
+                int playerTime = (int)Math.Floor(game.finalTime);
+                int playerScore = game.finalScore;
+                EnterYourNameForm form = new EnterYourNameForm();
+            }
+
         }
     }
 #endif

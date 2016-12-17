@@ -17,6 +17,9 @@ namespace GameHSeSurvival
         SpriteFont Font;
         private Camera camera;
         private IRepository repo = new Repository();
+
+        public int finalScore;
+        public double finalTime;
         
         public Game1()
         {
@@ -80,6 +83,8 @@ namespace GameHSeSurvival
             repo.Player.Update(gameTime);
             repo.Board.Update();
             repo.Collisisons();
+            finalScore = repo.Player.Score;
+            finalTime += gameTime.ElapsedGameTime.TotalSeconds;
         }
 
         /// <summary>
