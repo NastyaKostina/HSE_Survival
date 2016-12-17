@@ -17,7 +17,8 @@ namespace GameHSeSurvival
         #region CheckCollision
         public delegate void DeleteTeacher(Teacher teacher);
         public event DeleteTeacher DeleteTeacherEvent;
-        
+
+        public bool IsTouch = false;
         public override bool Collision(Player player, GameTime gametime)
         {
                 if (this.HurtOrKilledBy(player)[0])
@@ -29,6 +30,7 @@ namespace GameHSeSurvival
                 }
                 if (this.HurtOrKilledBy(player)[1])
                 {
+                IsTouch = true;
                 //player.Sprite_vector = new Vector2(550, 576 - player.Sprite_texture.Height);
                 return false;
                 }
