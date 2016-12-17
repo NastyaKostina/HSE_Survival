@@ -43,7 +43,7 @@ namespace ScoresForm
                 }
 
                 sqlCommand = new SqlCommand("INSERT INTO PlayerScoreTable (Id,Name,Score,Time,GamePlayed) values(@Id,@Name, @Score, @Time, @GamePlayed)", sqlConnection);
-                sqlCommand.Parameters.Add(new SqlParameter("@Id", listOfIds.Max() + 1));
+                sqlCommand.Parameters.Add(new SqlParameter("@Id", listOfIds.Max() + 1)); // id
                 sqlCommand.Parameters.Add(new SqlParameter("@Name", textBox1.Text));
                 sqlCommand.Parameters.Add(new SqlParameter("@Score", Math.Round(Convert.ToDouble(label4.Text))));
                 sqlCommand.Parameters.Add(new SqlParameter("@Time", Convert.ToInt32(label5.Text)));
