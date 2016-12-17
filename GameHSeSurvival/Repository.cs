@@ -123,7 +123,8 @@ namespace GameHSeSurvival
             coins[81, 8] = 1;
         }
 
-        
+        Texture2D bomb_texture;
+        SpriteBatch spriteBatch;
         public void SetValues(Texture2D player_texture, Texture2D block_texture, Texture2D teacher1_texture, Texture2D teacher2_texture, Texture2D coin_texture, Texture2D hat_texture, Texture2D bomb_texture, SpriteBatch spriteBatch)
         {
             _Player = new Player(player_texture, new Vector2(448, ground_level - player_texture.Height), spriteBatch);
@@ -142,12 +143,16 @@ namespace GameHSeSurvival
             _Teachers.Add(new Teacher(teacher2_texture, new Vector2(3200, ground_level - teacher2_texture.Height), spriteBatch));
             _Teachers.Add(new Teacher(teacher2_texture, new Vector2(4672, ground_level - teacher2_texture.Height - 192), spriteBatch));
             _Hat = new Hat(hat_texture, new Vector2(85*64, ground_level - hat_texture.Height), spriteBatch);
-            _Bomb = new BombQuestion(bomb_texture, new Vector2()
-                /*new Vector2(random.Next((int)(Player.Sprite_vector.X - 320), (int)(Player.Sprite_vector.X + 320)), 0)*/, spriteBatch);
-            
+            this.bomb_texture = bomb_texture;
+            this.spriteBatch = spriteBatch;
+            // _Bomb = new BombQuestion(bomb_texture, new Vector2()
+            /*new Vector2(random.Next((int)(Player.Sprite_vector.X - 320), (int)(Player.Sprite_vector.X + 320)), 0)*/
+            //, spriteBatch);
+
             Player.Score = 0;
             
         }
+        public float spawn;
         public void Collisisons(GameTime gametime)
         {
             foreach (var item in Teachers)
@@ -155,10 +160,10 @@ namespace GameHSeSurvival
                 item.DeleteTeacherEvent += e => Teachers.Remove(e);
                 if (item.Collision(Player, gametime))
                 {
-                    this.Start(item, gametime);
                     break;
                 }
-                
+                 if(item.IsTouch)  this.Start(bomb_texture, gametime, spriteBatch);
+
             }
             foreach (var item in Coins)
             {
@@ -172,14 +177,16 @@ namespace GameHSeSurvival
             }
         }
         
-    public void Start(Teacher teacher, GameTime gametime)
+        Random random = new Random();
+    public void Start(Texture2D bomb_texture, GameTime gametime, SpriteBatch spritebatch)
         {
-            while(Bombs.Count <10)
-                Bombs.Add(Bomb);
-
-            foreach (var bomb in Bombs)
+            spawn += (float)gametime.ElapsedGameTime.TotalSeconds;
+            int randx = random.Next(2600, 3800);
+            if (spawn >= 1)
             {
-                bomb.Update(gametime);
+                spawn = 0;
+                if (Bombs.Count() < 10)
+                    Bombs.Add(new BombQuestion(bomb_texture, new Vector2(randx, 0), spritebatch));
             }
         }
 
