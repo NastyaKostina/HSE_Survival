@@ -13,10 +13,11 @@ namespace GameHSeSurvival
         public delegate void DeleteBomb(BombQuestion bombquestion);
         public event DeleteBomb DeleteBombEvent;
         public Vector2 Speed { get; set; }
-
+        Random random = new Random();
         public BombQuestion(Texture2D texture, Vector2 position, SpriteBatch spritebatch)
             : base(texture, position, spritebatch)
         {
+            this.Sprite_vector = new Vector2((random.Next(3008, 3456)),0);
             Speed = new Vector2(0, 0.5f);
         }
         public override bool Collision(Player player, GameTime gametime)
@@ -36,8 +37,7 @@ namespace GameHSeSurvival
         }
         public void Update(GameTime gametime)
         {
-            this.Sprite_vector += Speed;
-
+            this.Sprite_vector += Speed * (float)gametime.ElapsedGameTime.TotalMilliseconds / 15;
         }
     }
 }
