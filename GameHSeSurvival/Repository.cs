@@ -28,6 +28,14 @@ namespace GameHSeSurvival
         Hat _Hat;
         List<BombQuestion> _Bombs = new List<BombQuestion>();
 
+        public double Timer
+        {
+            get
+            {
+                return Math.Floor(timer);
+            }
+        }
+
         public List<Teacher> Teachers
         {
             get
@@ -184,8 +192,8 @@ namespace GameHSeSurvival
             }
             
             Hat.Draw();
-            spriteBatch.DrawString(Font, Convert.ToString("NAKOPLENNAYA: " + 0.27 * Player.Score), new Vector2(Player.Sprite_vector.X - 30, Player.Sprite_vector.Y - 30), Color.Azure);//new Vector2(Player.Sprite_vector.X - 7*64, 64), Color.Azure);           
-            spriteBatch.DrawString(Font, Convert.ToString("Time: " + Math.Round(timer += gameTime.ElapsedGameTime.TotalSeconds, 2)), new Vector2(Player.Sprite_vector.X - 12, Player.Sprite_vector.Y - 60), Color.Azure);
+            spriteBatch.DrawString(Font, Convert.ToString("NAKOPLENNAYA: " + 0.2 * Player.Score), new Vector2(Player.Sprite_vector.X - 30, Player.Sprite_vector.Y - 30), Color.Azure);//new Vector2(Player.Sprite_vector.X - 7*64, 64), Color.Azure);           
+            spriteBatch.DrawString(Font, Convert.ToString("Time: " + Math.Floor(timer += gameTime.ElapsedGameTime.TotalSeconds)), new Vector2(Player.Sprite_vector.X - 12, Player.Sprite_vector.Y - 60), Color.Azure);
         }
     }
 }
