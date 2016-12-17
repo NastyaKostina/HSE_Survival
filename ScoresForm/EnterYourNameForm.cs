@@ -18,11 +18,12 @@ namespace ScoresForm
         public int scores;
         public int time;
 
-        public EnterYourNameForm(int score, int time)
+        public EnterYourNameForm(int time, int score)
         {
             InitializeComponent();
+            timer1.Start();
             listView1.View = View.Details;
-            label5.Text = Convert.ToString(score); label4.Text = Convert.ToString(time);
+            label4.Text = Convert.ToString(0.2 * score); label5.Text = Convert.ToString(time);
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -82,6 +83,15 @@ namespace ScoresForm
                 }
             }
             sqlConnection.Close();
+        }
+
+        private void timer1_Tick(object sender, EventArgs e)
+        {
+            if (textBox1.Text == "")
+            {
+                button1.Enabled = false;
+            }
+            else { button1.Enabled = true; }
         }
     }
 }

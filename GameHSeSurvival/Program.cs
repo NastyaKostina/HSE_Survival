@@ -23,12 +23,11 @@ namespace GameHSeSurvival
                 playerTime = (int)Math.Floor(game.finalTime);
                 playerScore = game.finalScore;
             }
-            //EnterYourNameForm form = new EnterYourNameForm();
-            //form.scores = playerScore;
-            //form.time = playerTime;
-            Application.EnableVisualStyles();
-            //Application.SetCompatibleTextRenderingDefault(true);
-            Application.Run(new EnterYourNameForm(playerTime, playerScore));
+            if (playerScore != 0)
+            {
+                Application.EnableVisualStyles();
+                Application.Run(new EnterYourNameForm(playerTime, playerScore));
+            }
         }
     }
 #endif
