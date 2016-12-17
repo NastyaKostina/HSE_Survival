@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 namespace GameHSeSurvival
 {
     
-    class Enemies_Repository:IRepository
+    class Repository:IRepository
     {
         
         const int ground_level = 576;

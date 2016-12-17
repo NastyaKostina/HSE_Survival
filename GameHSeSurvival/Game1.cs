@@ -16,7 +16,7 @@ namespace GameHSeSurvival
 
         SpriteFont Font;
         private Camera camera;
-        private IRepository repo = new Enemies_Repository();
+        private IRepository repo = new Repository();
         
         public Game1()
         {

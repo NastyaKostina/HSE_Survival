@@ -44,7 +44,7 @@
     <Compile Include="Sprite Helpers\Board.cs" />
     <Compile Include="Camera.cs" />
     <Compile Include="Sprites\Coin.cs" />
-    <Compile Include="Enemies_Repository.cs" />
+    <Compile Include="Repository.cs" />
     <Compile Include="Game1.cs" />
     <Compile Include="Sprites\Hat.cs" />
     <Compile Include="Interfaces\IRepository.cs" />
@@ -88,6 +88,7 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="ClassDiagram1.cd" />
+    <None Include="ClassDiagram2.cd" />
     <None Include="Content\Font.spritefont">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
