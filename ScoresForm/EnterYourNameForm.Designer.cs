@@ -56,16 +56,16 @@
             // 
             // textBox1
             // 
-            this.textBox1.Location = new System.Drawing.Point(181, 44);
+            this.textBox1.Location = new System.Drawing.Point(12, 69);
             this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(151, 20);
+            this.textBox1.Size = new System.Drawing.Size(198, 20);
             this.textBox1.TabIndex = 1;
             // 
             // button1
             // 
             this.button1.Location = new System.Drawing.Point(12, 97);
             this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(320, 23);
+            this.button1.Size = new System.Drawing.Size(375, 23);
             this.button1.TabIndex = 2;
             this.button1.Text = "Внести результат в таблицу рекордов";
             this.button1.UseVisualStyleBackColor = true;
@@ -80,18 +80,19 @@
             this.Сыграно});
             this.listView1.Location = new System.Drawing.Point(12, 126);
             this.listView1.Name = "listView1";
-            this.listView1.Size = new System.Drawing.Size(320, 193);
+            this.listView1.Size = new System.Drawing.Size(375, 193);
             this.listView1.TabIndex = 3;
             this.listView1.UseCompatibleStateImageBehavior = false;
             // 
             // Игрок
             // 
             this.Игрок.Text = "Игрок";
-            this.Игрок.Width = 100;
+            this.Игрок.Width = 105;
             // 
             // Накопленная
             // 
             this.Накопленная.Text = "Накопленная";
+            this.Накопленная.Width = 90;
             // 
             // Время
             // 
@@ -100,7 +101,7 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(12, 72);
+            this.label2.Location = new System.Drawing.Point(277, 55);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(78, 13);
             this.label2.TabIndex = 4;
@@ -109,7 +110,7 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(195, 72);
+            this.label3.Location = new System.Drawing.Point(247, 72);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(110, 13);
             this.label3.TabIndex = 5;
@@ -119,7 +120,7 @@
             // 
             this.label4.AutoSize = true;
             this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.label4.Location = new System.Drawing.Point(98, 72);
+            this.label4.Location = new System.Drawing.Point(363, 55);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(14, 13);
             this.label4.TabIndex = 6;
@@ -129,7 +130,7 @@
             // 
             this.label5.AutoSize = true;
             this.label5.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.label5.Location = new System.Drawing.Point(311, 72);
+            this.label5.Location = new System.Drawing.Point(363, 72);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(14, 13);
             this.label5.TabIndex = 7;
@@ -137,17 +138,19 @@
             // 
             // timer1
             // 
+            this.timer1.Interval = 1;
             this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
             // 
             // Сыграно
             // 
             this.Сыграно.Text = "Сыграно";
+            this.Сыграно.Width = 115;
             // 
             // EnterYourNameForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(344, 326);
+            this.ClientSize = new System.Drawing.Size(399, 326);
             this.Controls.Add(this.label5);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.label3);
