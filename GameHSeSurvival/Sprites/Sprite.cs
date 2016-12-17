@@ -34,7 +34,7 @@ namespace GameHSeSurvival
                           Sprite_texture.Width, Sprite_texture.Height);
             }
         }
-       public virtual bool Collision(Player player)
+       public virtual bool Collision(Player player, GameTime gametime)
         {
             return true;
         }

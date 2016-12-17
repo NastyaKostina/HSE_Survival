@@ -10,13 +10,34 @@ namespace GameHSeSurvival
 {
     class BombQuestion:Sprite
     {
-        Random random = new Random();
-        bool IsRemoved;
+        public delegate void DeleteBomb(BombQuestion bombquestion);
+        public event DeleteBomb DeleteBombEvent;
+        public Vector2 Speed { get; set; }
+
         public BombQuestion(Texture2D texture, Vector2 position, SpriteBatch spritebatch)
             : base(texture, position, spritebatch)
         {
-            position = new Vector2(random.Next(0, 960 - texture.Width), -640);
+            Speed = new Vector2(0, 0.5f);
         }
+        public override bool Collision(Player player, GameTime gametime)
+        {
+            if (this.rectangle.Bottom >= 576)
+            {
+                DeleteBombEvent?.Invoke(this);
+                return true;
+            }
+            if (player.rectangle.Intersects(this.rectangle))
+            {
+                player.Sprite_vector = new Vector2(550, 576 - player.Sprite_texture.Height);
+                player.Score = 0;
+                return false;
+            }
+            return false;
+        }
+        public void Update(GameTime gametime)
+        {
+            this.Sprite_vector += Speed;
 
+        }
     }
 }

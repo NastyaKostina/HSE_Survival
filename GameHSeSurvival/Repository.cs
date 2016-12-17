@@ -9,16 +9,24 @@ using System.Threading.Tasks;
 namespace GameHSeSurvival
 {
     
-    class Repository:IRepository
+    class Repository
     {
         
         const int ground_level = 576;
         double timer;
+        private BombQuestion _Bomb;
+
+        public BombQuestion Bomb
+        {
+            get { return _Bomb; }   
+        }
+
         public List<Teacher> _Teachers = new List<Teacher>();
         List<Coin> _Coins = new List<Coin>();
         Player _Player;
         Board _Board;
         Hat _Hat;
+        List<BombQuestion> _Bombs = new List<BombQuestion>();
 
         public List<Teacher> Teachers
         {
@@ -58,6 +66,12 @@ namespace GameHSeSurvival
                 return _Hat;
             }
         }
+        
+        public List<BombQuestion> Bombs
+        {
+            get { return _Bombs; }
+        }
+
 
         int[,] coins = new int[87, 10];
         public void CoinsCoordinates()
@@ -101,7 +115,8 @@ namespace GameHSeSurvival
             coins[81, 8] = 1;
         }
 
-        public void SetValues(Texture2D player_texture, Texture2D block_texture, Texture2D teacher1_texture, Texture2D teacher2_texture, Texture2D coin_texture, Texture2D hat_texture, SpriteBatch spriteBatch)
+        Random random = new Random();
+        public void SetValues(Texture2D player_texture, Texture2D block_texture, Texture2D teacher1_texture, Texture2D teacher2_texture, Texture2D coin_texture, Texture2D hat_texture, Texture2D bomb_texture, SpriteBatch spriteBatch)
         {
             _Player = new Player(player_texture, new Vector2(448, ground_level - player_texture.Height), spriteBatch);
             _Board = new Board(spriteBatch, block_texture, 87, 10);
@@ -119,64 +134,37 @@ namespace GameHSeSurvival
             _Teachers.Add(new Teacher(teacher2_texture, new Vector2(3200, ground_level - teacher2_texture.Height), spriteBatch));
             _Teachers.Add(new Teacher(teacher2_texture, new Vector2(4672, ground_level - teacher2_texture.Height - 192), spriteBatch));
             _Hat = new Hat(hat_texture, new Vector2(85*64, ground_level - hat_texture.Height), spriteBatch);
+            _Bomb = new BombQuestion(bomb_texture, new Vector2((random.Next(3100, 3200)), 0)
+                /*new Vector2(random.Next((int)(Player.Sprite_vector.X - 320), (int)(Player.Sprite_vector.X + 320)), 0)*/, spriteBatch);
+            while (Bombs.Count < 10)
+                Bombs.Add(Bomb);
             Player.Score = 0;
             
         }
-        public void Collisisons()
+        public void Collisisons(GameTime gametime)
         {
             foreach (var item in Teachers)
-            {
+            { 
                 item.DeleteTeacherEvent += e => Teachers.Remove(e);
-                if(item.Collision(Player)) break;
+                item.QuestionEvent += Start;
+                if(item.Collision(Player, gametime)) break;
             }
             foreach (var item in Coins)
             {
                 item.DeleteCoinEvent += e => Coins.Remove(e);
-                if(item.Collision(Player)) break;
+                if(item.Collision(Player, gametime)) break;
+            }
+            foreach (var item in Bombs)
+            {
+                item.DeleteBombEvent += e => Bombs.Remove(e);
+                if (item.Collision(Player, gametime)) break;
             }
         }
-
-        //public void DrawTeacher(SpriteBatch sb)
-        //{
-        //    for (int i = 0; i < Teachers.Count(); i++)
-        //    {
-        //        Teachers[i].Draw();
-        //    }
-        //}
-        //public void CollisionsTeachers(Player player)
-        //{
-        //    for (int i = 0; i < Teachers.Count(); i++)
-        //    {
-        //        if (Teachers[i].HurtOrKilledBy(player)[0])
-        //        {
-        //            Teachers.Remove(Teachers[i]);
-        //            i--;
-        //            player.move -= Vector2.UnitY * 25f;
-        //            Player.Score += 5;
-        //            break;
-        //        }
-
-        //        if (Teachers[i].HurtOrKilledBy(player)[1])
-        //        {
-        //            player.Sprite_vector = new Vector2(550, 576 - player.Sprite_texture.Height);
-        //            break;
-        //        }
-        //        if (Teachers[i].HurtOrKilledBy(player)[0] == false && Teachers[i].HurtOrKilledBy(player)[1] == false)
-        //        { }
-        //    }
-        //}
         
-        //public void CollisionsCoins()
-        //{
-        //    for (int i = 0; i < _Coins.Count; i ++)
-        //    {
-        //        if (Player.rectangle.Intersects(_Coins[i].rectangle))
-        //        {
-        //            _Coins.RemoveAt(i);
-        //            Player.Score += 1;
-        //        }
-        //    }
-        //}
+    public void Start(GameTime gametime)
+        {
+            foreach (var item in Bombs) item.Update(gametime);
+        }
 
         public void Draw(SpriteBatch spriteBatch, SpriteFont Font, GameTime gameTime)
         {
@@ -190,6 +178,11 @@ namespace GameHSeSurvival
             {
                 item.Draw();
             }
+            foreach (var item in Bombs)
+            {
+                item.Draw();
+            }
+            
             Hat.Draw();
             spriteBatch.DrawString(Font, Convert.ToString("NAKOPLENNAYA: " + 0.27 * Player.Score), new Vector2(Player.Sprite_vector.X - 30, Player.Sprite_vector.Y - 30), Color.Azure);//new Vector2(Player.Sprite_vector.X - 7*64, 64), Color.Azure);           
             spriteBatch.DrawString(Font, Convert.ToString("Time: " + Math.Round(timer += gameTime.ElapsedGameTime.TotalSeconds, 2)), new Vector2(Player.Sprite_vector.X - 12, Player.Sprite_vector.Y - 60), Color.Azure);

@@ -16,7 +16,7 @@ namespace GameHSeSurvival
             : base(texture, position, spritebatch)
         {
         }
-        public override bool Collision(Player player)
+        public override bool Collision(Player player, GameTime gametime)
         {
                 if (player.rectangle.Intersects(this.rectangle))
                 {

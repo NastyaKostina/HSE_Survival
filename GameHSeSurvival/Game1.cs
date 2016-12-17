@@ -16,7 +16,7 @@ namespace GameHSeSurvival
 
         SpriteFont Font;
         private Camera camera;
-        private IRepository repo = new Repository();
+        private Repository repo = new Repository();
         
         public Game1()
         {
@@ -53,7 +53,8 @@ namespace GameHSeSurvival
             Texture2D teacher2_texture = Content.Load<Texture2D>("учительница.png");
             Texture2D coin_texture = Content.Load<Texture2D>("монетка.png");
             Texture2D hat_texture = Content.Load<Texture2D>("шапочка.png");
-            repo.SetValues(player_texture, block_texture, teacher1_texture, teacher2_texture, coin_texture,hat_texture,spriteBatch);
+            Texture2D bomb_texture = Content.Load<Texture2D>("бомба.png");
+            repo.SetValues(player_texture, block_texture, teacher1_texture, teacher2_texture, coin_texture,hat_texture, bomb_texture,spriteBatch);
             Font = Content.Load<SpriteFont>("Font");
         }
 
@@ -79,7 +80,7 @@ namespace GameHSeSurvival
             camera.Update(repo.Player.Sprite_vector, repo.Board.columns * 64, repo.Board.rows * 64);
             repo.Player.Update(gameTime);
             repo.Board.Update();
-            repo.Collisisons();
+            repo.Collisisons(gameTime);
         }
 
         /// <summary>
