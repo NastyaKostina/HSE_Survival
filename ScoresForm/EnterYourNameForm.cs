@@ -31,7 +31,7 @@ namespace ScoresForm
             try
             {
                 sqlConnection.Open();
-                sqlCommand = new SqlCommand("INSERT INTO PlayerScoreTable (Id,Name,Score,Time) values('" + 5 + "','" + textBox1.Text + "','" + Convert.ToInt32(label4.Text) + "','" + Convert.ToInt32(label5.Text) + "')", sqlConnection);
+                sqlCommand = new SqlCommand("INSERT INTO PlayerScoreTable (Id,Name,Score,Time) values('" + 2 + "','" + textBox1.Text + "','" + Math.Round(Convert.ToDouble(label4.Text)) + "','" + Convert.ToInt32(label5.Text) + "')", sqlConnection);
                 sqlCommand.ExecuteNonQuery();
                 MessageBox.Show("Ваш результат внесен в таблицу рекордов!");
                 listView1.Items.Clear();
@@ -54,6 +54,7 @@ namespace ScoresForm
                     }
                 }
                 sqlConnection.Close();
+                timer1.Stop();
             }
             catch (Exception exception)
             {
