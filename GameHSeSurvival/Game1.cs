@@ -83,6 +83,8 @@ namespace GameHSeSurvival
             camera.Update(repo.Player.Sprite_vector, repo.Board.columns * 64, repo.Board.rows * 64);
             repo.Player.Update(gameTime);
             repo.Board.Update();
+            //repo.spawn += (float)gameTime.ElapsedGameTime.TotalSeconds;
+            foreach (var bomb in repo.Bombs) bomb.Update(gameTime);
             repo.Collisisons(gameTime);
             finalScore = repo.Player.Score;
             finalTime += gameTime.ElapsedGameTime.TotalSeconds;

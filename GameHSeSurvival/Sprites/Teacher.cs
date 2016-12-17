@@ -18,21 +18,20 @@ namespace GameHSeSurvival
         public delegate void DeleteTeacher(Teacher teacher);
         public event DeleteTeacher DeleteTeacherEvent;
 
-        public bool IsDied = false;
+        public bool IsTouch = false;
         public override bool Collision(Player player, GameTime gametime)
         {
                 if (this.HurtOrKilledBy(player)[0])
                 {
                 DeleteTeacherEvent?.Invoke(this);
                 player.Movements.move -= Vector2.UnitY * 25f;
-                IsDied = true;
                 player.Score += 5;
                 return true;
                 }
-
                 if (this.HurtOrKilledBy(player)[1])
                 {
-                    //player.Sprite_vector = new Vector2(550, 576 - player.Sprite_texture.Height);
+                IsTouch = true;
+                player.Sprite_vector = new Vector2(550, 576 - player.Sprite_texture.Height);
                 return false;
                 }
                 if (this.HurtOrKilledBy(player)[0] == false && this.HurtOrKilledBy(player)[1] == false)
