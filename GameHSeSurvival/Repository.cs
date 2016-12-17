@@ -103,7 +103,7 @@ namespace GameHSeSurvival
 
         public void SetValues(Texture2D player_texture, Texture2D block_texture, Texture2D teacher1_texture, Texture2D teacher2_texture, Texture2D coin_texture, Texture2D hat_texture, SpriteBatch spriteBatch)
         {
-            _Player = new Player(player_texture, new Vector2(550, ground_level - player_texture.Height), spriteBatch);
+            _Player = new Player(player_texture, new Vector2(448, ground_level - player_texture.Height), spriteBatch);
             _Board = new Board(spriteBatch, block_texture, 87, 10);
             this.CoinsCoordinates();
             for (int i = 0; i < 87; i++)
