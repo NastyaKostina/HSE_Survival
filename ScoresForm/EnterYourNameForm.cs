@@ -13,7 +13,7 @@ namespace ScoresForm
 {
     public partial class EnterYourNameForm : Form
     {
-        SqlConnection sqlConnection = new SqlConnection("Data Source=tcp:hseserver.database.windows.net,1433;Initial Catalog = PlayerScoresDatabase; User ID = vvsdobnov; Password=03041997Gaga");
+        SqlConnection sqlConnection = new SqlConnection("Data Source=tcp:hseserver.database.windows.net,1433;Initial Catalog = PlayerScoresDatabase; User ID = vvsdobnov; Password=03041997Gaga"); // I know that I will burn in hell for it, but I really didn't find the way to do it better :(
         SqlCommand sqlCommand;
         public int scores;
         public int time;
@@ -31,7 +31,13 @@ namespace ScoresForm
             try
             {
                 sqlConnection.Open();
-                sqlCommand = new SqlCommand("INSERT INTO PlayerScoreTable (Id,Name,Score,Time) values('" + 2 + "','" + textBox1.Text + "','" + Math.Round(Convert.ToDouble(label4.Text)) + "','" + Convert.ToInt32(label5.Text) + "')", sqlConnection);
+
+                sqlCommand = new SqlCommand("INSERT INTO PlayerScoreTable (Name,Score,Time,Game Played) values(@Name, @Score, @Time, @GamePlayed)", sqlConnection);
+                sqlCommand.Parameters.Add(new SqlParameter("@Name", textBox1.Text));
+                sqlCommand.Parameters.Add(new SqlParameter("@Score", Math.Round(Convert.ToDouble(label4.Text))));
+                sqlCommand.Parameters.Add(new SqlParameter("@Time", Convert.ToInt32(label5.Text)));
+                sqlCommand.Parameters.Add(new SqlParameter("@GamePlayed", DateTime.Now));
+
                 sqlCommand.ExecuteNonQuery();
                 MessageBox.Show("Ваш результат внесен в таблицу рекордов!");
                 listView1.Items.Clear();
@@ -46,9 +52,11 @@ namespace ScoresForm
                         ListViewItem A = new ListViewItem();
                         ListViewItem.ListViewSubItem B = new ListViewItem.ListViewSubItem();
                         ListViewItem.ListViewSubItem C = new ListViewItem.ListViewSubItem();
+                        ListViewItem.ListViewSubItem D = new ListViewItem.ListViewSubItem();
                         A.Text = reader.GetString(1);
                         B.Text = Convert.ToString(reader.GetInt32(2));
                         C.Text = Convert.ToString(reader.GetInt32(3));
+                        D.Text = DateTime.Now.ToString();
                         A.SubItems.Add(B); A.SubItems.Add(C);
                         listView1.Items.Add(A);
                     }
