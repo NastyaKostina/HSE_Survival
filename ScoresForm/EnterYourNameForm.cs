@@ -18,10 +18,11 @@ namespace ScoresForm
         public int scores;
         public int time;
 
-        public EnterYourNameForm()
+        public EnterYourNameForm(int score, int time)
         {
             InitializeComponent();
             listView1.View = View.Details;
+            label5.Text = Convert.ToString(score); label4.Text = Convert.ToString(time);
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -29,7 +30,7 @@ namespace ScoresForm
             try
             {
                 sqlConnection.Open();
-                sqlCommand = new SqlCommand("INSERT INTO PlayerScoreTable (Id,Name,Score,Time) values('" + 4 + "','" + textBox1.Text + "','" + 12 + "','" + 12 + "')", sqlConnection);
+                sqlCommand = new SqlCommand("INSERT INTO PlayerScoreTable (Id,Name,Score,Time) values('" + 5 + "','" + textBox1.Text + "','" + Convert.ToInt32(label4.Text) + "','" + Convert.ToInt32(label5.Text) + "')", sqlConnection);
                 sqlCommand.ExecuteNonQuery();
                 MessageBox.Show("Ваш результат внесен в таблицу рекордов!");
                 listView1.Items.Clear();

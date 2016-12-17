@@ -1,5 +1,6 @@
 ﻿using System;
 using ScoresForm;
+using System.Windows.Forms;
 
 namespace GameHSeSurvival
 {
@@ -15,17 +16,19 @@ namespace GameHSeSurvival
         [STAThread]
         static void Main()
         {
+            int playerTime, playerScore;
             using (var game = new Game1())
             {
                 game.Run();
-                int playerTime = (int)Math.Floor(game.finalTime);
-                int playerScore = game.finalScore;
-                EnterYourNameForm form = new EnterYourNameForm();
-                form.scores = playerScore;
-                form.time = playerTime;
-                // form.Show();
+                playerTime = (int)Math.Floor(game.finalTime);
+                playerScore = game.finalScore;
             }
-
+            //EnterYourNameForm form = new EnterYourNameForm();
+            //form.scores = playerScore;
+            //form.time = playerTime;
+            Application.EnableVisualStyles();
+            //Application.SetCompatibleTextRenderingDefault(true);
+            Application.Run(new EnterYourNameForm(playerTime, playerScore));
         }
     }
 #endif
