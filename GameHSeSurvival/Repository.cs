@@ -157,9 +157,10 @@ namespace GameHSeSurvival
         {
             foreach (var item in Teachers)
             {
-                item.DeleteTeacherEvent += e => Teachers.Remove(e);
+               // item.DeleteTeacherEvent += e => Teachers.Remove(e);
                 if (item.Collision(Player, gametime))
                 {
+                    item.DeleteTeacherEvent += e => Teachers.Remove(e);
                     break;
                 }
                 else
