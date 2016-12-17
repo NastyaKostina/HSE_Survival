@@ -162,8 +162,11 @@ namespace GameHSeSurvival
                 {
                     break;
                 }
-                 if(item.IsTouch)  this.Start(bomb_texture, gametime, spriteBatch);
-
+                else
+                { 
+                    this.Start(bomb_texture, gametime, spriteBatch);
+                }
+               
             }
             foreach (var item in Coins)
             {

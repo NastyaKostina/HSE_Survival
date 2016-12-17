@@ -17,7 +17,6 @@ namespace GameHSeSurvival
         public BombQuestion(Texture2D texture, Vector2 position, SpriteBatch spritebatch)
             : base(texture, position, spritebatch)
         {
-            //this.Sprite_vector = new Vector2((random.Next(3008, 3456)),0);
             Speed = new Vector2(0, 0.5f);
         }
         public override bool Collision(Player player, GameTime gametime)
