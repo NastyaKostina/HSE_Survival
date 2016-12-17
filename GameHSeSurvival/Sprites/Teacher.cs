@@ -31,7 +31,7 @@ namespace GameHSeSurvival
                 if (this.HurtOrKilledBy(player)[1])
                 {
                 IsTouch = true;
-                player.Sprite_vector = new Vector2(550, 576 - player.Sprite_texture.Height);
+                //player.Sprite_vector = new Vector2(550, 576 - player.Sprite_texture.Height);
                 return false;
                 }
                 if (this.HurtOrKilledBy(player)[0] == false && this.HurtOrKilledBy(player)[1] == false)
