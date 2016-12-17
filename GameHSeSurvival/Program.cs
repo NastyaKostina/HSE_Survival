@@ -21,6 +21,9 @@ namespace GameHSeSurvival
                 int playerTime = (int)Math.Floor(game.finalTime);
                 int playerScore = game.finalScore;
                 EnterYourNameForm form = new EnterYourNameForm();
+                form.scores = playerScore;
+                form.time = playerTime;
+                // form.Show();
             }
 
         }

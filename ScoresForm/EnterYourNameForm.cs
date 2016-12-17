@@ -15,6 +15,8 @@ namespace ScoresForm
     {
         SqlConnection sqlConnection = new SqlConnection("Data Source=tcp:hseserver.database.windows.net,1433;Initial Catalog = PlayerScoresDatabase; User ID = vvsdobnov; Password=03041997Gaga");
         SqlCommand sqlCommand;
+        public int scores;
+        public int time;
 
         public EnterYourNameForm()
         {
