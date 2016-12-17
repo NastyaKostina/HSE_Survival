@@ -162,8 +162,8 @@ namespace GameHSeSurvival
                 {
                     break;
                 }
-                else
-                { 
+                while (item.IsTouch)
+                {
                     this.Start(bomb_texture, gametime, spriteBatch);
                 }
                
