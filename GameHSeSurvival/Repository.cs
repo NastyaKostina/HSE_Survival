@@ -52,61 +52,66 @@ namespace GameHSeSurvival
         Texture2D bomb_texture;
         SpriteBatch spriteBatch;
 
-        int[,] coins = new int[87, 10];
-        public void CoinsCoordinates()
-        {
-            coins[9, 1] = 1;
-            coins[9, 3] = 1;
-            coins[18, 5] = 1;
-            coins[24, 2] = 1;
-            coins[29, 2] = 1;
-            coins[29, 3] = 1;
-            coins[29, 4] = 1;
-            coins[35, 1] = 1;
-            coins[36, 5] = 1;
-            coins[36, 6] = 1;
-            coins[36, 7] = 1;
-            coins[45, 8] = 1;
-            coins[46, 8] = 1;
-            coins[47, 8] = 1;
-            coins[48, 8] = 1;
-            coins[49, 5] = 1;
-            coins[49, 6] = 1;
-            coins[49, 7] = 1;
-            coins[55, 4] = 1;
-            coins[55, 5] = 1;
-            coins[55, 6] = 1;
-            coins[58, 7] = 1;
-            coins[58, 8] = 1;
-            coins[60, 3] = 1;
-            coins[60, 4] = 1;
-            coins[60, 5] = 1;
-            coins[64, 8] = 1;
-            coins[66, 5] = 1;
-            coins[69, 4] = 1;
-            coins[69, 5] = 1;
-            coins[69, 6] = 1;
-            coins[75, 1] = 1;
-            coins[75, 2] = 1;
-            coins[78, 6] = 1;
-            coins[78, 7] = 1;
-            coins[81, 8] = 1;
-            coins[81, 8] = 1;
-        }
+        //int[,] coins = new int[87, 10];
+        //public void CoinsCoordinates()
+        //{
+        //    coins[9, 1] = 1;
+        //    coins[9, 3] = 1;
+        //    coins[18, 5] = 1;
+        //    coins[24, 2] = 1;
+        //    coins[29, 2] = 1;
+        //    coins[29, 3] = 1;
+        //    coins[29, 4] = 1;
+        //    coins[35, 1] = 1;
+        //    coins[36, 5] = 1;
+        //    coins[36, 6] = 1;
+        //    coins[36, 7] = 1;
+        //    coins[45, 8] = 1;
+        //    coins[46, 8] = 1;
+        //    coins[47, 8] = 1;
+        //    coins[48, 8] = 1;
+        //    coins[49, 5] = 1;
+        //    coins[49, 6] = 1;
+        //    coins[49, 7] = 1;
+        //    coins[55, 4] = 1;
+        //    coins[55, 5] = 1;
+        //    coins[55, 6] = 1;
+        //    coins[58, 7] = 1;
+        //    coins[58, 8] = 1;
+        //    coins[60, 3] = 1;
+        //    coins[60, 4] = 1;
+        //    coins[60, 5] = 1;
+        //    coins[64, 8] = 1;
+        //    coins[66, 5] = 1;
+        //    coins[69, 4] = 1;
+        //    coins[69, 5] = 1;
+        //    coins[69, 6] = 1;
+        //    coins[75, 1] = 1;
+        //    coins[75, 2] = 1;
+        //    coins[78, 6] = 1;
+        //    coins[78, 7] = 1;
+        //    coins[81, 8] = 1;
+        //    coins[81, 8] = 1;
+        //}
 
         
         public void SetValues(Dictionary<string, Texture2D> Values, SpriteBatch spriteBatch)
         {
             Player = new Player(Values["студент"], new Vector2(448, ground_level - Values["студент"].Height), spriteBatch);
-            Board = new Board(spriteBatch, Values["блок"], 87, 10);
-            this.CoinsCoordinates();
-            for (int i = 0; i < 87; i++)
+            Board = new Board(spriteBatch, Values["блок"], Values["монетка"], 87, 10);
+            //this.CoinsCoordinates();
+            //for (int i = 0; i < 87; i++)
+            //{
+            //    for (int j = 0; j < 10; j++)
+            //    {
+            //        if (coins[i, j] == 1)
+            //            Coins.Add(new Coin(Values["монетка"], new Vector2(i * 64, j * 64), spriteBatch));
+            //    }
+            //}
+            foreach (var coin in Board.coins)
             {
-                for (int j = 0; j < 10; j++)
-                {
-                    if (coins[i, j] == 1)
-                        Coins.Add(new Coin(Values["монетка"], new Vector2(i * 64, j * 64), spriteBatch));
-                }
+                if (coin.exist)
+                    _Coins.Add(coin);
             }
 
             Teachers.Add(new Teacher(Values["учитель"], new Vector2(3840, ground_level - Values["учитель"].Height), spriteBatch));
@@ -128,7 +133,7 @@ namespace GameHSeSurvival
                 {
                     break;
                 }
-                   this.Start(bomb_texture, gametime, spriteBatch);  
+                 //  this.Start(bomb_texture, gametime, spriteBatch);  
             }
             foreach (var item in Coins)
             {
