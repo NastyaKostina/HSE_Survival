@@ -17,6 +17,7 @@ namespace GameHSeSurvival
         SpriteFont Font;
         private Camera camera;
         private Repository repo = new Repository();
+        private Texture2D background;
 
         public int finalScore;
         public double finalTime;
@@ -59,6 +60,7 @@ namespace GameHSeSurvival
             Values.Add("монетка", Content.Load<Texture2D>("монетка.png"));
             Values.Add("шапочка", Content.Load<Texture2D>("шапочка.png"));
             Values.Add("бомба",Content.Load<Texture2D>("бомба.png"));
+            background = Content.Load<Texture2D>("fon.png");
 
             repo.SetValues(Values,spriteBatch);
             Font = Content.Load<SpriteFont>("Font");
@@ -109,6 +111,7 @@ namespace GameHSeSurvival
                               null, null, null, null,
                               camera.Transform);
             base.Draw(gameTime);
+            spriteBatch.Draw(background, new Vector2(0, 0), Color.White);
             repo.Draw(spriteBatch, Font, gameTime);
             spriteBatch.End();
         }
