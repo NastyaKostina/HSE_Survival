@@ -45,7 +45,7 @@ namespace ScoresForm
                     B.Text = scores[i + 1];
                     C.Text = scores[i + 2];
                     D.Text = scores[i + 3];
-                    E.Text = Convert.ToString(Math.Round((Convert.ToDouble(scores[i + 1]) / Convert.ToDouble(scores[i + 2])) * 10, 2));
+                    E.Text = Convert.ToString(Math.Round((Convert.ToDouble(scores[i + 1]) / Convert.ToDouble(scores[i + 2])) * 10, 4));
                     A.SubItems.Add(B); A.SubItems.Add(C); A.SubItems.Add(D); A.SubItems.Add(E);
                     listView1.Items.Add(A);
                 }
