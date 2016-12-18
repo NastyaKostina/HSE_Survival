@@ -172,6 +172,7 @@ namespace GameHSeSurvival
                 item.DeleteBombEvent += e => Bombs.Remove(e);
                 if (item.Collision(Player, gametime)) break;
             }
+            
         }
         
         Random random = new Random();
