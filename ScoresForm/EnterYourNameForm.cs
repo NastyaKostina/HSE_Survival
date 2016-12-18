@@ -8,12 +8,14 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Data.SqlClient;
+using System.Configuration;
 
 namespace ScoresForm
 {
     public partial class EnterYourNameForm : Form
     {
-        SqlConnection sqlConnection = new SqlConnection("Data Source=tcp:hseserver.database.windows.net,1433;Initial Catalog = PlayerScoresDatabase; User ID = vvsdobnov; Password=03041997Gaga"); // I know that I will burn in hell for it, but I really didn't find the way to do it better :(
+
+        string sqlConnectionString = ConfigurationManager.ConnectionStrings["MyDatabase"].ConnectionString;
         SqlCommand sqlCommand;
         public int scores;
         public int time;
@@ -23,11 +25,13 @@ namespace ScoresForm
             InitializeComponent();
             timer1.Start();
             listView1.View = View.Details;
-            label4.Text = Convert.ToString(0.2 * score); label5.Text = Convert.ToString(time);
+            label4.Text = Convert.ToString(0.01 * score); label5.Text = Convert.ToString(time);
         }
 
         private void button1_Click(object sender, EventArgs e)
         {
+            //string sqlConnectionString = settings[0].ToString();
+            SqlConnection sqlConnection = new SqlConnection(sqlConnectionString);
             try
             {
                 sqlConnection.Open();
@@ -85,6 +89,8 @@ namespace ScoresForm
 
         private void EnterYourNameForm_Load(object sender, EventArgs e)
         {
+            //string sqlConnectionString = settings[0].ToString();//ConfigurationManager.ConnectionStrings["MyDatabase"].ConnectionString;
+            SqlConnection sqlConnection = new SqlConnection(sqlConnectionString);
             try
             {
                 sqlConnection.Open();
