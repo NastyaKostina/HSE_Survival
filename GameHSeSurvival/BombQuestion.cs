@@ -19,7 +19,8 @@ namespace GameHSeSurvival
         {
             Speed = new Vector2(0, 0.5f);
         }
-        public override bool Collision(Player player, GameTime gametime)
+
+        public override bool Collision(Player player)
         {
             if (this.rectangle.Bottom >= 576)
             {
@@ -34,6 +35,7 @@ namespace GameHSeSurvival
             }
             return false;
         }
+
         public void Update(GameTime gametime)
         {
             this.Sprite_vector += Speed * (float)gametime.ElapsedGameTime.TotalMilliseconds / 15;

@@ -18,7 +18,7 @@ namespace GameHSeSurvival
         public delegate void DeleteTeacher(Teacher teacher);
         public event DeleteTeacher DeleteTeacherEvent;
         
-        public override bool Collision(Player player, GameTime gametime)
+        public override bool Collision(Player player)
         {
                 if (this.HurtOrKilledBy(player)[0])
                 {

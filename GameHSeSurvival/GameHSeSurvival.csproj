@@ -40,7 +40,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="BombQuestion.cs" />
-    <Compile Include="Interfaces\IRepositoryGeneral.cs" />
+    <Compile Include="Interfaces\IRepository.cs" />
     <Compile Include="Sprites\Block.cs" />
     <Compile Include="Sprite Helpers\Board.cs" />
     <Compile Include="Camera.cs" />
@@ -48,7 +48,6 @@
     <Compile Include="Repository.cs" />
     <Compile Include="Game1.cs" />
     <Compile Include="Sprites\Hat.cs" />
-    <Compile Include="Interfaces\IRepository.cs" />
     <Compile Include="Sprites\Player.cs" />
     <Compile Include="Sprite Helpers\PlayerMovementSystem.cs" />
     <Compile Include="Program.cs" />

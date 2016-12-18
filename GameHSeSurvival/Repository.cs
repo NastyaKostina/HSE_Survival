@@ -9,25 +9,38 @@ using System.Threading.Tasks;
 namespace GameHSeSurvival
 {
     
-    class Repository
+    class Repository : IRepository
     {
         
         const int ground_level = 576;
-        double timer;
-        private BombQuestion _Bomb;
+        
+        public Player Player { get; set; }
+        public Board Board { get; set; }
+        public Hat Hat { get; set; }
+        public BombQuestion Bomb { get; set; }
 
-        public BombQuestion Bomb
+        private List<Coin> _Coins = new List<Coin>();
+        public List<Coin> Coins
         {
-            get { return _Bomb; }   
+            get { return _Coins; }
+            set { _Coins = value; }
+        }
+        
+        private IList<Teacher> _Teachers = new List<Teacher>();
+        public IList<Teacher> Teachers
+        {
+            get { return _Teachers; }   
+            set { _Teachers = value; }
+        }
+        
+        private IList<BombQuestion> _Bombs = new List<BombQuestion>();
+        public IList<BombQuestion> Bombs
+        {
+            get { return _Bombs; }
+            set { _Bombs  = value; }
         }
 
-        public List<Teacher> _Teachers = new List<Teacher>();
-        List<Coin> _Coins = new List<Coin>();
-        Player _Player;
-        Board _Board;
-        Hat _Hat;
-        List<BombQuestion> _Bombs = new List<BombQuestion>();
-
+        double timer;
         public double Timer
         {
             get
@@ -36,50 +49,8 @@ namespace GameHSeSurvival
             }
         }
 
-        public List<Teacher> Teachers
-        {
-            get
-            {
-                return _Teachers;
-            }
-        }
-
-        public List<Coin> Coins
-        {
-            get
-            {
-                return _Coins;
-            }
-        }
-        public Player Player
-        {
-            get
-            {
-                return _Player;
-            }
-        }
-
-        public Board Board
-        {
-            get
-            {
-                return _Board;
-            }
-        }
-
-        public Hat Hat
-        {
-            get
-            {
-                return _Hat;
-            }
-        }
-        
-        public List<BombQuestion> Bombs
-        {
-            get { return _Bombs; }
-        }
-
+        Texture2D bomb_texture;
+        SpriteBatch spriteBatch;
 
         int[,] coins = new int[87, 10];
         public void CoinsCoordinates()
@@ -123,65 +94,64 @@ namespace GameHSeSurvival
             coins[81, 8] = 1;
         }
 
-        Texture2D bomb_texture;
-        SpriteBatch spriteBatch;
-
-        public void SetValues(Texture2D player_texture, Texture2D block_texture, Texture2D teacher1_texture, Texture2D teacher2_texture, Texture2D coin_texture, Texture2D hat_texture, Texture2D bomb_texture, SpriteBatch spriteBatch)
+        
+        public void SetValues(Dictionary<string, Texture2D> Values, SpriteBatch spriteBatch)
         {
-            _Player = new Player(player_texture, new Vector2(448, ground_level - player_texture.Height), spriteBatch);
-            _Board = new Board(spriteBatch, block_texture, 87, 10);
+            Player = new Player(Values["студент"], new Vector2(448, ground_level - Values["студент"].Height), spriteBatch);
+            Board = new Board(spriteBatch, Values["блок"], 87, 10);
             this.CoinsCoordinates();
             for (int i = 0; i < 87; i++)
             {
                 for (int j = 0; j < 10; j++)
                 {
                     if (coins[i, j] == 1)
-                        _Coins.Add(new Coin(coin_texture, new Vector2(i * 64, j * 64), spriteBatch));
+                        Coins.Add(new Coin(Values["монетка"], new Vector2(i * 64, j * 64), spriteBatch));
                 }
             }
 
-            _Teachers.Add(new Teacher(teacher1_texture, new Vector2(3840, ground_level - teacher1_texture.Height), spriteBatch));
-            _Teachers.Add(new Teacher(teacher2_texture, new Vector2(3200, ground_level - teacher2_texture.Height), spriteBatch));
-            _Teachers.Add(new Teacher(teacher2_texture, new Vector2(4672, ground_level - teacher2_texture.Height - 192), spriteBatch));
-            _Hat = new Hat(hat_texture, new Vector2(85*64, ground_level - hat_texture.Height), spriteBatch);
-            this.bomb_texture = bomb_texture;
+            Teachers.Add(new Teacher(Values["учитель"], new Vector2(3840, ground_level - Values["учитель"].Height), spriteBatch));
+            Teachers.Add(new Teacher(Values["учительница"], new Vector2(3200, ground_level - Values["учительница"].Height), spriteBatch));
+            Teachers.Add(new Teacher(Values["учительница"], new Vector2(4672, ground_level - Values["учительница"].Height - 192), spriteBatch));
+            Hat = new Hat(Values["шапочка"], new Vector2(85*64, ground_level - Values["шапочка"].Height), spriteBatch);
+            this.bomb_texture = Values["бомба"];
             this.spriteBatch = spriteBatch;
             Player.Score = 0;
             
         }
-        public float spawn;
+        
         public void Collisisons(GameTime gametime)
         {
             foreach (var item in Teachers)
             {
                 item.DeleteTeacherEvent += e => Teachers.Remove(e);
-                if (item.Collision(Player, gametime))
+                if (item.Collision(Player))
                 {
                     break;
                 }
-                   this.Start(bomb_texture, gametime, spriteBatch);
-                
+                   this.Start(bomb_texture, gametime, spriteBatch);  
             }
             foreach (var item in Coins)
             {
                 item.DeleteCoinEvent += e => Coins.Remove(e);
-                if(item.Collision(Player, gametime)) break;
+                if(item.Collision(Player)) break;
             }
             foreach (var item in Bombs)
             {
                 item.DeleteBombEvent += e => Bombs.Remove(e);
-                if (item.Collision(Player, gametime)) break;
+                if (item.Collision(Player)) break;
             }
             
         }
         
         Random random = new Random();
-    public void Start(Texture2D bomb_texture, GameTime gametime, SpriteBatch spritebatch)
+        float spawn;
+
+        public void Start(Texture2D bomb_texture, GameTime gametime, SpriteBatch spritebatch)
         {
             if (Teachers.Count != 0)
             {
                 int randx = random.Next(832, 4928);
-                spawn += (float)gametime.ElapsedGameTime.TotalSeconds;
+               spawn += (float)gametime.ElapsedGameTime.TotalSeconds;
                 if (spawn >= 1)
                 {
                     spawn = 0;
@@ -202,7 +172,7 @@ namespace GameHSeSurvival
             {
                 Teachers[i].Draw();
             }
-            foreach (var item in _Coins)
+            foreach (var item in Coins)
             {
                 item.Draw();
             }
