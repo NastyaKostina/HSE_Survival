@@ -87,7 +87,7 @@ namespace GameHSeSurvival
             Rectangle onePixelRighter = player.rectangle;
             onePixelRighter.Offset(1, 0);
             return !Board.CurrentBoard.HasSpaceToJumpFromTheLeftSide(player, onePixelRighter);
-        } // НОВЫЙ МЕТОД
+        } 
         private bool IsMovingBlockOnTheLeftSide(Player player)
         {
             Rectangle onePixelLefter = player.rectangle;

@@ -106,9 +106,6 @@ namespace GameHSeSurvival
         /// <param name="gameTime">Provides a snapshot of timing values.</param>
         protected override void Draw(GameTime gameTime)
         {
-
-            string helloWords = string.Format("Created by\nNastya Kostina\nand\nVasiliy Sdobnov\n\n\nWe are so glad\nyou decided to play\nthis disaster.\n\n\nSpace - Jump\n<- - Move Left\n-> - Move Right");//\nWe are so glad\nyou decided to play\nthis disaster.\nPress right and left\n\to replace Mario.\nSpace for jumping.");
-
             GraphicsDevice.Clear(Color.CornflowerBlue);
             spriteBatch.Begin(SpriteSortMode.Deferred,
                               BlendState.AlphaBlend,
