@@ -10,8 +10,9 @@ namespace GameHSeSurvival
 {
     class Coin:Sprite
     {
-        public delegate void DeleteCoin(Coin coin);
+        public delegate void DeleteCoin(Coin coin); 
         public event DeleteCoin DeleteCoinEvent;
+
         public bool exist;
         public Coin(Texture2D texture, Vector2 position, SpriteBatch spritebatch)
             : base(texture, position, spritebatch)

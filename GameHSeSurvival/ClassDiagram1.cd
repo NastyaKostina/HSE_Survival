@@ -1,2 +1,140 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<ClassDiagram /> 
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="GameHSeSurvival.Camera" Collapsed="true">
+    <Position X="8.25" Y="4.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAwAAAAAAAAAAAAABAAAAAQAAAAEAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Camera.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="GameHSeSurvival.Game1" Collapsed="true">
+    <Position X="10.5" Y="3.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAEEAAAgAAAwAAAAECAAAAAAAAABgAAAAAAAACAAQ=</HashCode>
+      <FileName>Game1.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="GameHSeSurvival.Program" Collapsed="true">
+    <Position X="12.25" Y="3.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABAAAAAA=</HashCode>
+      <FileName>Program.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="GameHSeSurvival.Repository" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="8.25" Y="3.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAAEAAACACAoAAEAABCAABAEAAAAAAIAQAAyAEBQA=</HashCode>
+      <FileName>Repository.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="GameHSeSurvival.Board" Collapsed="true">
+    <Position X="6" Y="3" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQACAAAAABAAgAOAQBIAAAAAgAIAAAACAIAAAAABAA=</HashCode>
+      <FileName>Sprite Helpers\Board.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="GameHSeSurvival.PlayerMovementSystem" Collapsed="true">
+    <Position X="5.75" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAoAAAIAAgCDAAAAACAAAAASAAAABAAAAAAAIBAA=</HashCode>
+      <FileName>Sprite Helpers\PlayerMovementSystem.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="GameHSeSurvival.Block" Collapsed="true">
+    <Position X="3.75" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAgAIAAAQAAAhAAAAAAAAAAQAAAAQAAAAAAAAAAAAA=</HashCode>
+      <FileName>Sprites\Block.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="GameHSeSurvival.BombQuestion" Collapsed="true">
+    <Position X="3.75" Y="6.5" Width="1.5" />
+    <InheritanceLine Type="GameHSeSurvival.Sprite" FixedToPoint="true">
+      <Path>
+        <Point X="1.125" Y="4.562" />
+        <Point X="1.125" Y="6.875" />
+        <Point X="3.75" Y="6.875" />
+      </Path>
+    </InheritanceLine>
+    <TypeIdentifier>
+      <HashCode>AAQAAAAAAIAAAAAAAAAAAAABAAAAAAAAAAQAAAAAAgA=</HashCode>
+      <FileName>Sprites\BombQuestion.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="GameHSeSurvival.Coin" Collapsed="true">
+    <Position X="3.75" Y="2.5" Width="1.5" />
+    <InheritanceLine Type="GameHSeSurvival.Sprite" ManuallyRouted="true" FixedFromPoint="true" FixedToPoint="true">
+      <Path>
+        <Point X="1.438" Y="4" />
+        <Point X="1.438" Y="2.812" />
+        <Point X="3.75" Y="2.812" />
+      </Path>
+    </InheritanceLine>
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAIAAAgAAAAAAEAAAAAAAAAAAAQAAAAAAAAA=</HashCode>
+      <FileName>Sprites\Coin.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="GameHSeSurvival.Hat" Collapsed="true">
+    <Position X="3.75" Y="4.5" Width="1.5" />
+    <InheritanceLine Type="GameHSeSurvival.Sprite" FixedFromPoint="true">
+      <Path>
+        <Point X="1.75" Y="4.312" />
+        <Point X="2.125" Y="4.312" />
+        <Point X="2.125" Y="4.846" />
+        <Point X="3.75" Y="4.846" />
+      </Path>
+    </InheritanceLine>
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Sprites\Hat.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="GameHSeSurvival.Player" Collapsed="true">
+    <Position X="3.75" Y="1.5" Width="1.5" />
+    <InheritanceLine Type="GameHSeSurvival.Sprite" ManuallyRouted="true" FixedFromPoint="true" FixedToPoint="true">
+      <Path>
+        <Point X="1.125" Y="4" />
+        <Point X="1.125" Y="1.284" />
+        <Point X="4.5" Y="1.284" />
+        <Point X="4.5" Y="1.5" />
+      </Path>
+    </InheritanceLine>
+    <TypeIdentifier>
+      <HashCode>AAQAAAAAAAAAAAiABAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Sprites\Player.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="GameHSeSurvival.Sprite" Collapsed="true">
+    <Position X="0.5" Y="4" Width="1.25" />
+    <TypeIdentifier>
+      <HashCode>AQAAAAAAAMAAAgAAAAAAAiAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Sprites\Sprite.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="GameHSeSurvival.Teacher" Collapsed="true">
+    <Position X="3.75" Y="5.5" Width="1.5" />
+    <InheritanceLine Type="GameHSeSurvival.Sprite" FixedFromPoint="true" FixedToPoint="true">
+      <Path>
+        <Point X="1.438" Y="4.562" />
+        <Point X="1.438" Y="5.812" />
+        <Point X="3.75" Y="5.812" />
+      </Path>
+    </InheritanceLine>
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAIAAAAAABAAAAAAAAAAAAAAAAEAAAAAAAAA=</HashCode>
+      <FileName>Sprites\Teacher.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Interface Name="GameHSeSurvival.IRepository" Collapsed="true">
+    <Position X="8.25" Y="2.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAgAAEAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Interfaces\IRepository.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>

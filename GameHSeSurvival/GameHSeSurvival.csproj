@@ -39,7 +39,7 @@
     <ApplicationIcon>Icon.ico</ApplicationIcon>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="BombQuestion.cs" />
+    <Compile Include="Sprites\BombQuestion.cs" />
     <Compile Include="Interfaces\IRepository.cs" />
     <Compile Include="Sprites\Block.cs" />
     <Compile Include="Sprite Helpers\Board.cs" />
@@ -93,7 +93,6 @@
   <ItemGroup>
     <None Include="app.config" />
     <None Include="ClassDiagram1.cd" />
-    <None Include="ClassDiagram2.cd" />
     <None Include="Content\Font.spritefont">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>

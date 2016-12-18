@@ -13,11 +13,11 @@ namespace GameHSeSurvival
     class Board
     {
         public Block[,] blocks { get; set; } //massiv of blocks
-        public Coin[,] coins { get; set; }
+        public Coin[,] coins { get; set; } //massiv of coins
         public int columns { get; set; } 
         public int rows { get; set; }
         public Texture2D block_texture { get; set; }
-        private SpriteBatch sb { get; set; }
+    private SpriteBatch sb { get; set; }
         //cause the game has only one level therefore there is just one map
         public static Board CurrentBoard { get; private set; } 
         //ctor converts screen to massiv of blocks
@@ -47,51 +47,6 @@ namespace GameHSeSurvival
         }
         private void FunctionsOfBlocks()
         {
-            #region betaVariantOfDrawingMap
-            //for (int x = 0; x < columns; x++)
-            //{
-            //    for (int y = 0; y < rows; y++)
-            //    {
-            //        if ((y == 9 && ((x >= 0 && x <= 24) || (x >= 24 && x <= 40) || (x >= 40 && x <= 73) || (x >= 78 && x <= 86))) || // ground
-            //            ((x == 86) || (x == 0)) || // walls
-            //            (y == 4 && (x >= 9 && x <= 13)) || // 1
-            //            (y == 6 && (x >= 16 && x <= 18)) || // 2
-            //            (y == 6 && (x >= 25 && x <= 29)) || // 3
-            //            (y == 4 && (x >= 31 && x <= 35)) || // 4
-            //            (y == 6 && (x >= 43 && x <= 47)) || // 5
-            //            (y == 4 && (x >= 51 && x <= 53)) || // 6
-            //            (y == 2 && (x >= 56 && x <= 59)) || // 7
-            //            (y == 6 && (x >= 65 && x <= 67)) || // 8
-            //            (y == 6 && (x >= 71 && x <= 74)) || // 9
-            //            (y == 4 && (x >= 76 && x <= 78))    // 10
-            //            )
-            //        {
-            //            blocks[x, y].blocked = true;
-            //        }
-            //        if (y == 6 && (x >= 25 && x <= 29))
-            //        {
-            //blocks[x, y].moving = true;
-            //blocks[x, y].speed = Vector2.UnitX * 2f;
-            //blocks[x, y].steps = 3;
-            //blocks[x, y].changeposition = blocks[x, y].steps * blocks[x, y].Sprite_texture.Width;
-            //        }
-            //        if (y == 6 && (x >= 43 && x <= 47))
-            //        {
-            //            blocks[x, y].moving = true;
-            //            blocks[x, y].speed = Vector2.UnitX * 2f;
-            //            blocks[x, y].steps = 2;
-            //            blocks[x, y].changeposition = blocks[x, y].steps * blocks[x, y].Sprite_texture.Width;
-            //        }
-            //        if (y == 4 && (x >= 76 && x <= 78))
-            //        {
-            //            blocks[x, y].moving = true;
-            //            blocks[x, y].speed = Vector2.UnitX * 2f;
-            //            blocks[x, y].steps = 3;
-            //            blocks[x, y].changeposition = blocks[x, y].steps * blocks[x, y].Sprite_texture.Width;
-            //        }
-            //    }
-            //}
-            #endregion
             Assembly assembly = Assembly.GetExecutingAssembly();
             string resourceName = "GameHSeSurvival.Content.Map.csv";
             using (Stream stream = assembly.GetManifestResourceStream(resourceName))
@@ -125,6 +80,7 @@ namespace GameHSeSurvival
                 }
             }
         }
+
         //draw blocks
         public void Draw()
         {
@@ -178,10 +134,8 @@ namespace GameHSeSurvival
             bool_massive[0] = false; bool_massive[1] = false;
             foreach (var block in blocks)
             {
-                if (block.blocked && block.moving // block.Sprite_vector.Y == player.Sprite_vector.Y + player.Sprite_texture.Height
-                                                  //  && block.rectangle.Top == player.rectangle.Bottom 
+                if (block.blocked && block.moving
                   && rectangleToCheckDown.Intersects(block.rectangle))
-                // player.rectangle.Intersects(block.rectangle))
                 {
                     speed = block.speed;
                     bool_massive[0] = true;
