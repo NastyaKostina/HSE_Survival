@@ -2,7 +2,9 @@
 using Microsoft.Xna.Framework.Graphics;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -11,6 +13,7 @@ namespace GameHSeSurvival
     class Board
     {
         public Block[,] blocks { get; set; } //massiv of blocks
+        public Coin[,] coins { get; set; }
         public int columns { get; set; } 
         public int rows { get; set; }
         public Texture2D block_texture { get; set; }
@@ -18,7 +21,7 @@ namespace GameHSeSurvival
         //cause the game has only one level therefore there is just one map
         public static Board CurrentBoard { get; private set; } 
         //ctor converts screen to massiv of blocks
-        public Board(SpriteBatch sb, Texture2D block_texture, int columns, int rows)
+        public Board(SpriteBatch sb, Texture2D block_texture, Texture2D coin, int columns, int rows)
         {
             this.sb = sb;
             this.block_texture = block_texture;
@@ -27,12 +30,16 @@ namespace GameHSeSurvival
             Vector2 block_speed;
             block_speed = Vector2.Zero;
             blocks = new Block[columns, rows];
+            coins = new Coin[columns, rows];
             for (int i = 0; i < columns; i++)
             {
                 for (int j = 0; j < rows; j++)
                 {
-                    Vector2 position = new Vector2(i * block_texture.Width, j * block_texture.Height);
-                    blocks[i, j] = new Block(block_texture, position, sb, false, false, 0);
+                    Vector2 positionblock = new Vector2(i * block_texture.Width, j * block_texture.Height);
+                    blocks[i, j] = new Block(block_texture, positionblock, sb, false, false, 0);
+                    Vector2 positioncoin = new Vector2(i * coin.Width, j * coin.Height);
+                    coins[i, j] = new Coin(coin, positioncoin, sb);
+
                 }
             }
             FunctionsOfBlocks(); //fill up blocks
@@ -40,47 +47,81 @@ namespace GameHSeSurvival
         }
         private void FunctionsOfBlocks()
         {
-            for (int x = 0; x < columns; x++)
+            #region betaVariantOfDrawingMap
+            //for (int x = 0; x < columns; x++)
+            //{
+            //    for (int y = 0; y < rows; y++)
+            //    {
+            //        if ((y == 9 && ((x >= 0 && x <= 24) || (x >= 24 && x <= 40) || (x >= 40 && x <= 73) || (x >= 78 && x <= 86))) || // ground
+            //            ((x == 86) || (x == 0)) || // walls
+            //            (y == 4 && (x >= 9 && x <= 13)) || // 1
+            //            (y == 6 && (x >= 16 && x <= 18)) || // 2
+            //            (y == 6 && (x >= 25 && x <= 29)) || // 3
+            //            (y == 4 && (x >= 31 && x <= 35)) || // 4
+            //            (y == 6 && (x >= 43 && x <= 47)) || // 5
+            //            (y == 4 && (x >= 51 && x <= 53)) || // 6
+            //            (y == 2 && (x >= 56 && x <= 59)) || // 7
+            //            (y == 6 && (x >= 65 && x <= 67)) || // 8
+            //            (y == 6 && (x >= 71 && x <= 74)) || // 9
+            //            (y == 4 && (x >= 76 && x <= 78))    // 10
+            //            )
+            //        {
+            //            blocks[x, y].blocked = true;
+            //        }
+            //        if (y == 6 && (x >= 25 && x <= 29))
+            //        {
+            //blocks[x, y].moving = true;
+            //blocks[x, y].speed = Vector2.UnitX * 2f;
+            //blocks[x, y].steps = 3;
+            //blocks[x, y].changeposition = blocks[x, y].steps * blocks[x, y].Sprite_texture.Width;
+            //        }
+            //        if (y == 6 && (x >= 43 && x <= 47))
+            //        {
+            //            blocks[x, y].moving = true;
+            //            blocks[x, y].speed = Vector2.UnitX * 2f;
+            //            blocks[x, y].steps = 2;
+            //            blocks[x, y].changeposition = blocks[x, y].steps * blocks[x, y].Sprite_texture.Width;
+            //        }
+            //        if (y == 4 && (x >= 76 && x <= 78))
+            //        {
+            //            blocks[x, y].moving = true;
+            //            blocks[x, y].speed = Vector2.UnitX * 2f;
+            //            blocks[x, y].steps = 3;
+            //            blocks[x, y].changeposition = blocks[x, y].steps * blocks[x, y].Sprite_texture.Width;
+            //        }
+            //    }
+            //}
+            #endregion
+            Assembly assembly = Assembly.GetExecutingAssembly();
+            string resourceName = "GameHSeSurvival.Content.Map.csv";
+            using (Stream stream = assembly.GetManifestResourceStream(resourceName))
+            using (StreamReader reader = new StreamReader(stream))
             {
-                for (int y = 0; y < rows; y++)
+                string row;
+                int y = -1;
+                while ((row = reader.ReadLine()) != null)
                 {
-                    if ((y == 9 && ((x >= 0 && x <= 24) || (x >= 24 && x <= 40) || (x >= 40 && x <= 73) || (x >= 78 && x <= 86))) || // ground
-                        ((x == 86) || (x == 0)) || // walls
-                        (y == 4 && (x >= 9 && x <= 13)) || // 1
-                        (y == 6 && (x >= 16 && x <= 18)) || // 2
-                        (y == 6 && (x >= 25 && x <= 29)) || // 3
-                        (y == 4 && (x >= 31 && x <= 35)) || // 4
-                        (y == 6 && (x >= 43 && x <= 47)) || // 5
-                        (y == 4 && (x >= 51 && x <= 53)) || // 6
-                        (y == 2 && (x >= 56 && x <= 59)) || // 7
-                        (y == 6 && (x >= 65 && x <= 67)) || // 8
-                        (y == 6 && (x >= 71 && x <= 74)) || // 9
-                        (y == 4 && (x >= 76 && x <= 78))    // 10
-                        )
-                    {
-                        blocks[x, y].blocked = true;
-                    }
-                    if (y == 6 && (x >= 25 && x <= 29))
-                    {
-                        blocks[x, y].moving = true;
-                        blocks[x, y].speed = Vector2.UnitX * 2f;
-                        blocks[x, y].steps = 3;
-                        blocks[x, y].changeposition = blocks[x, y].steps * blocks[x, y].Sprite_texture.Width;
-                    }
-                    if (y == 6 && (x >= 43 && x <= 47))
-                    {
-                        blocks[x, y].moving = true;
-                        blocks[x, y].speed = Vector2.UnitX * 2f;
-                        blocks[x, y].steps = 2;
-                        blocks[x, y].changeposition = blocks[x, y].steps * blocks[x, y].Sprite_texture.Width;
-                    }
-                    if (y == 4 && (x >= 76 && x <= 78))
-                    {
-                        blocks[x, y].moving = true;
-                        blocks[x, y].speed = Vector2.UnitX * 2f;
-                        blocks[x, y].steps = 3;
-                        blocks[x, y].changeposition = blocks[x, y].steps * blocks[x, y].Sprite_texture.Width;
-                    }
+                    string[] sprites = row.Split(';');
+                    y++;
+                        for (int x = 0; x < sprites.Length; x++)
+                        {
+                            switch (sprites[x])
+                            {
+                                case "1":
+                                    blocks[x, y].blocked = true; break;
+
+                                case "2":
+                                    blocks[x, y].blocked = true;
+                                    blocks[x, y].moving = true;
+                                    blocks[x, y].speed = Vector2.UnitX * 2f;
+                                    blocks[x, y].steps = 2;
+                                    blocks[x, y].changeposition = blocks[x, y].steps * blocks[x, y].Sprite_texture.Width;
+                                    break;
+
+                                case "3":
+                                coins[x, y].exist = true; break;
+                            }
+                        }
                 }
             }
         }
@@ -90,6 +131,10 @@ namespace GameHSeSurvival
             foreach (var block in blocks)
             {
                 block.Draw();
+            }
+            foreach (var coin in coins)
+            {
+                coin.Draw();
             }
         }
         public bool HasSpaceForRectangle(Rectangle rectangleToCheck)

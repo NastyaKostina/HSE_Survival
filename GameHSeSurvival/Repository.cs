@@ -81,47 +81,47 @@ namespace GameHSeSurvival
         }
 
 
-        int[,] coins = new int[87, 10];
-        public void CoinsCoordinates()
-        {
-            coins[9, 1] = 1;
-            coins[9, 3] = 1;
-            coins[18, 5] = 1;
-            coins[24, 2] = 1;
-            coins[29, 2] = 1;
-            coins[29, 3] = 1;
-            coins[29, 4] = 1;
-            coins[35, 1] = 1;
-            coins[36, 5] = 1;
-            coins[36, 6] = 1;
-            coins[36, 7] = 1;
-            coins[45, 8] = 1;
-            coins[46, 8] = 1;
-            coins[47, 8] = 1;
-            coins[48, 8] = 1;
-            coins[49, 5] = 1;
-            coins[49, 6] = 1;
-            coins[49, 7] = 1;
-            coins[55, 4] = 1;
-            coins[55, 5] = 1;
-            coins[55, 6] = 1;
-            coins[58, 7] = 1;
-            coins[58, 8] = 1;
-            coins[60, 3] = 1;
-            coins[60, 4] = 1;
-            coins[60, 5] = 1;
-            coins[64, 8] = 1;
-            coins[66, 5] = 1;
-            coins[69, 4] = 1;
-            coins[69, 5] = 1;
-            coins[69, 6] = 1;
-            coins[75, 1] = 1;
-            coins[75, 2] = 1;
-            coins[78, 6] = 1;
-            coins[78, 7] = 1;
-            coins[81, 8] = 1;
-            coins[81, 8] = 1;
-        }
+        //int[,] coins = new int[87, 10];
+        //public void CoinsCoordinates()
+        //{
+        //    coins[9, 1] = 1;
+        //    coins[9, 3] = 1;
+        //    coins[18, 5] = 1;
+        //    coins[24, 2] = 1;
+        //    coins[29, 2] = 1;
+        //    coins[29, 3] = 1;
+        //    coins[29, 4] = 1;
+        //    coins[35, 1] = 1;
+        //    coins[36, 5] = 1;
+        //    coins[36, 6] = 1;
+        //    coins[36, 7] = 1;
+        //    coins[45, 8] = 1;
+        //    coins[46, 8] = 1;
+        //    coins[47, 8] = 1;
+        //    coins[48, 8] = 1;
+        //    coins[49, 5] = 1;
+        //    coins[49, 6] = 1;
+        //    coins[49, 7] = 1;
+        //    coins[55, 4] = 1;
+        //    coins[55, 5] = 1;
+        //    coins[55, 6] = 1;
+        //    coins[58, 7] = 1;
+        //    coins[58, 8] = 1;
+        //    coins[60, 3] = 1;
+        //    coins[60, 4] = 1;
+        //    coins[60, 5] = 1;
+        //    coins[64, 8] = 1;
+        //    coins[66, 5] = 1;
+        //    coins[69, 4] = 1;
+        //    coins[69, 5] = 1;
+        //    coins[69, 6] = 1;
+        //    coins[75, 1] = 1;
+        //    coins[75, 2] = 1;
+        //    coins[78, 6] = 1;
+        //    coins[78, 7] = 1;
+        //    coins[81, 8] = 1;
+        //    coins[81, 8] = 1;
+        //}
 
         Texture2D bomb_texture;
         SpriteBatch spriteBatch;
@@ -129,16 +129,21 @@ namespace GameHSeSurvival
         public void SetValues(Texture2D player_texture, Texture2D block_texture, Texture2D teacher1_texture, Texture2D teacher2_texture, Texture2D coin_texture, Texture2D hat_texture, Texture2D bomb_texture, SpriteBatch spriteBatch)
         {
             _Player = new Player(player_texture, new Vector2(448, ground_level - player_texture.Height), spriteBatch);
-            _Board = new Board(spriteBatch, block_texture, 87, 10);
-            this.CoinsCoordinates();
-            for (int i = 0; i < 87; i++)
+            _Board = new Board(spriteBatch, block_texture, coin_texture, 87, 10);
+            foreach (var coin in _Board.coins)
             {
-                for (int j = 0; j < 10; j++)
-                {
-                    if (coins[i, j] == 1)
-                        _Coins.Add(new Coin(coin_texture, new Vector2(i * 64, j * 64), spriteBatch));
-                }
+                if (coin.exist == true)
+                _Coins.Add(coin);
             }
+            //this.CoinsCoordinates();
+            //for (int i = 0; i < 87; i++)
+            //{
+            //    for (int j = 0; j < 10; j++)
+            //    {
+            //        if (coins[i, j] == 1)
+            //            _Coins.Add(new Coin(coin_texture, new Vector2(i * 64, j * 64), spriteBatch));
+            //    }
+            //}
 
             _Teachers.Add(new Teacher(teacher1_texture, new Vector2(3840, ground_level - teacher1_texture.Height), spriteBatch));
             _Teachers.Add(new Teacher(teacher2_texture, new Vector2(3200, ground_level - teacher2_texture.Height), spriteBatch));
