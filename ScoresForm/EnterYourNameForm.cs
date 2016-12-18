@@ -40,11 +40,13 @@ namespace ScoresForm
                     ListViewItem.ListViewSubItem B = new ListViewItem.ListViewSubItem();
                     ListViewItem.ListViewSubItem C = new ListViewItem.ListViewSubItem();
                     ListViewItem.ListViewSubItem D = new ListViewItem.ListViewSubItem();
+                    ListViewItem.ListViewSubItem E = new ListViewItem.ListViewSubItem();
                     A.Text = scores[i];
                     B.Text = scores[i + 1];
                     C.Text = scores[i + 2];
                     D.Text = scores[i + 3];
-                    A.SubItems.Add(B); A.SubItems.Add(C); A.SubItems.Add(D);
+                    E.Text = Convert.ToString(Math.Round((Convert.ToDouble(scores[i + 1]) / Convert.ToDouble(scores[i + 2])) * 10, 2));
+                    A.SubItems.Add(B); A.SubItems.Add(C); A.SubItems.Add(D); A.SubItems.Add(E);
                     listView1.Items.Add(A);
                 }
                 timer1.Stop();
@@ -68,11 +70,13 @@ namespace ScoresForm
                     ListViewItem.ListViewSubItem B = new ListViewItem.ListViewSubItem();
                     ListViewItem.ListViewSubItem C = new ListViewItem.ListViewSubItem();
                     ListViewItem.ListViewSubItem D = new ListViewItem.ListViewSubItem();
+                    ListViewItem.ListViewSubItem E = new ListViewItem.ListViewSubItem();
                     A.Text = scores[i];
                     B.Text = scores[i + 1];
                     C.Text = scores[i + 2];
                     D.Text = scores[i + 3];
-                    A.SubItems.Add(B); A.SubItems.Add(C); A.SubItems.Add(D);
+                    E.Text = Convert.ToString(Math.Round(Convert.ToDouble(scores[i + 1]) / Convert.ToDouble(scores[i + 2]), 2));
+                    A.SubItems.Add(B); A.SubItems.Add(C); A.SubItems.Add(D); A.SubItems.Add(E);
                     listView1.Items.Add(A);
                 }
             }

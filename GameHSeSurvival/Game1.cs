@@ -21,6 +21,7 @@ namespace GameHSeSurvival
 
         public int finalScore;
         public double finalTime;
+        public bool wonTheGame = false;
         
         public Game1()
         {
@@ -91,7 +92,10 @@ namespace GameHSeSurvival
             foreach (var bomb in repo.Bombs) bomb.Update(gameTime);
             repo.Collisisons(gameTime);
             if (repo.Hat.Collision(repo.Player))
+            {
+                wonTheGame = true;
                 Exit();
+            }
             finalScore = repo.Player.Score;
             finalTime += gameTime.ElapsedGameTime.TotalSeconds;
         }

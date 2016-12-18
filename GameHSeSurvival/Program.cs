@@ -17,13 +17,15 @@ namespace GameHSeSurvival
         static void Main()
         {
             int playerTime, playerScore;
+            bool openScoreTable;
             using (var game = new Game1())
             {
                 game.Run();
                 playerTime = (int)Math.Floor(game.finalTime);
                 playerScore = game.finalScore;
+                openScoreTable = game.wonTheGame;
             }
-            if (playerScore != 0)
+            if (openScoreTable)
             {
                 Application.EnableVisualStyles();
                 Application.Run(new EnterYourNameForm(playerTime, playerScore));
