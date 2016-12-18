@@ -17,7 +17,6 @@ namespace GameHSeSurvival
         SpriteFont Font;
         private Camera camera;
         private Repository repo = new Repository();
-        bool endGame = false;
 
         public int finalScore;
         public double finalTime;
@@ -51,14 +50,17 @@ namespace GameHSeSurvival
         {
             spriteBatch = new SpriteBatch(GraphicsDevice);
             camera = new Camera(GraphicsDevice.Viewport);
-            Texture2D player_texture = Content.Load<Texture2D>("студент.png");
-            Texture2D block_texture = Content.Load<Texture2D>("блок.png");
-            Texture2D teacher1_texture = Content.Load<Texture2D>("учитель.png");
-            Texture2D teacher2_texture = Content.Load<Texture2D>("учительница.png");
-            Texture2D coin_texture = Content.Load<Texture2D>("монетка.png");
-            Texture2D hat_texture = Content.Load<Texture2D>("шапочка.png");
-            Texture2D bomb_texture = Content.Load<Texture2D>("бомба.png");
-            repo.SetValues(player_texture, block_texture, teacher1_texture, teacher2_texture, coin_texture,hat_texture,bomb_texture, spriteBatch);
+
+            Dictionary<string, Texture2D> Values = new Dictionary<string, Texture2D>();
+            Values.Add("студент", Content.Load<Texture2D>("студент.png"));
+            Values.Add("блок", Content.Load<Texture2D>("блок.png"));
+            Values.Add("учитель", Content.Load<Texture2D>("учитель.png"));
+            Values.Add("учительница", Content.Load<Texture2D>("учительница.png"));
+            Values.Add("монетка", Content.Load<Texture2D>("монетка.png"));
+            Values.Add("шапочка", Content.Load<Texture2D>("шапочка.png"));
+            Values.Add("бомба",Content.Load<Texture2D>("бомба.png"));
+
+            repo.SetValues(Values,spriteBatch);
             Font = Content.Load<SpriteFont>("Font");
         }
 
@@ -84,10 +86,9 @@ namespace GameHSeSurvival
             camera.Update(repo.Player.Sprite_vector, repo.Board.columns * 64, repo.Board.rows * 64);
             repo.Player.Update(gameTime);
             repo.Board.Update();
-            //repo.spawn += (float)gameTime.ElapsedGameTime.TotalSeconds;
             foreach (var bomb in repo.Bombs) bomb.Update(gameTime);
             repo.Collisisons(gameTime);
-            if (repo.Hat.Collision(repo.Player, gameTime))
+            if (repo.Hat.Collision(repo.Player))
                 Exit();
             finalScore = repo.Player.Score;
             finalTime += gameTime.ElapsedGameTime.TotalSeconds;
