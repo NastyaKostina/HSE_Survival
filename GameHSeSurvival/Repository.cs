@@ -108,7 +108,7 @@ namespace GameHSeSurvival
                 if (spawn >= 1)
                 {
                     spawn = 0;
-                    if (Bombs.Count() < 50)
+                    if (Bombs.Count() < 30)
                     {
                         Bombs.Add(new BombQuestion(bomb_texture, new Vector2(randx, 0), spritebatch));
                     }
