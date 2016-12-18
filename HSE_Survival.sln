@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GameHSeSurvival", "GameHSeS
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ScoresForm", "ScoresForm\ScoresForm.csproj", "{92C256E6-CEA8-4183-9F77-041317AC4AF6}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ConnectionToDatabase", "ConnectionToDatabase\ConnectionToDatabase.csproj", "{C9FD00D5-004B-497D-8DBC-424B03C7EDF5}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -29,6 +31,14 @@ Global
 		{92C256E6-CEA8-4183-9F77-041317AC4AF6}.Release|Any CPU.Build.0 = Release|Any CPU
 		{92C256E6-CEA8-4183-9F77-041317AC4AF6}.Release|x86.ActiveCfg = Release|Any CPU
 		{92C256E6-CEA8-4183-9F77-041317AC4AF6}.Release|x86.Build.0 = Release|Any CPU
+		{C9FD00D5-004B-497D-8DBC-424B03C7EDF5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C9FD00D5-004B-497D-8DBC-424B03C7EDF5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C9FD00D5-004B-497D-8DBC-424B03C7EDF5}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{C9FD00D5-004B-497D-8DBC-424B03C7EDF5}.Debug|x86.Build.0 = Debug|Any CPU
+		{C9FD00D5-004B-497D-8DBC-424B03C7EDF5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C9FD00D5-004B-497D-8DBC-424B03C7EDF5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C9FD00D5-004B-497D-8DBC-424B03C7EDF5}.Release|x86.ActiveCfg = Release|Any CPU
+		{C9FD00D5-004B-497D-8DBC-424B03C7EDF5}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
