@@ -159,7 +159,7 @@ namespace GameHSeSurvival
                 {
                     break;
                 }
-                    this.Start(bomb_texture, gametime, spriteBatch);
+                   // this.Start(bomb_texture, gametime, spriteBatch);
                 
             }
             foreach (var item in Coins)
